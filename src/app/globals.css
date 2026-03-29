@@ -1,0 +1,71 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --navy-deep: #1B2A4A;
+  --navy-primary: #2C4A7C;
+  --steel-blue: #4A7AAC;
+  --sky-soft: #7BA7CC;
+  --watercolor-bg: #F0F4F8;
+  --mist-white: #FAFCFF;
+  --leaf-green: #5C8A5C;
+  --glass: rgba(255, 255, 255, 0.15);
+  --glass-border: rgba(74, 122, 172, 0.2);
+  --shadow-blue: rgba(44, 74, 124, 0.12);
+}
+
+@layer base {
+  body {
+    @apply bg-[var(--mist-white)] text-[var(--navy-deep)] antialiased;
+    font-feature-settings: "ss01", "ss02", "cv01", "cv02";
+  }
+}
+
+@layer components {
+  .section-label {
+    @apply flex items-center gap-2 text-[0.7rem] font-semibold tracking-[0.25em] uppercase text-[var(--steel-blue)] mb-4;
+  }
+  
+  .section-label::before {
+    content: '';
+    @apply block w-6 h-[1px] bg-[var(--steel-blue)];
+  }
+
+  .btn-primary {
+    @apply bg-[var(--navy-primary)] text-white px-8 py-3.5 rounded-full text-[0.85rem] font-medium tracking-[0.08em] uppercase transition-all duration-300 inline-flex items-center gap-2 hover:bg-[var(--steel-blue)] hover:-translate-y-0.5 hover:shadow-[0_8px_30px_rgba(44,74,124,0.3)];
+  }
+
+  .btn-outline {
+    @apply bg-transparent text-[var(--navy-primary)] px-8 py-3.5 rounded-full text-[0.85rem] font-medium tracking-[0.08em] uppercase border-[1.5px] border-[var(--navy-primary)] transition-all duration-300 hover:bg-[var(--navy-primary)] hover:text-white hover:-translate-y-0.5;
+  }
+}
+
+.about-blob {
+  border-radius: 60% 40% 50% 60% / 50% 60% 40% 50%;
+  background: radial-gradient(ellipse, rgba(123, 167, 204, 0.12) 0%, transparent 70%);
+  animation: blobFloat 8s ease-in-out infinite;
+}
+
+@keyframes blobFloat {
+  0%, 100% { transform: scale(1) rotate(0deg); }
+  50% { transform: scale(1.05) rotate(5deg); }
+}
+
+.ring-pulse {
+  animation: ringPulse 3s ease-in-out infinite;
+}
+
+@keyframes ringPulse {
+  0%, 100% { transform: scale(1); opacity: 0.6; }
+  50% { transform: scale(1.02); opacity: 1; }
+}
+
+.wa-pulse {
+  animation: waPulse 2.5s ease-in-out infinite;
+}
+
+@keyframes waPulse {
+  0%, 100% { box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4); }
+  50% { box-shadow: 0 4px 40px rgba(37, 211, 102, 0.6), 0 0 0 10px rgba(37, 211, 102, 0.05); }
+}
