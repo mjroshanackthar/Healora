@@ -325,7 +325,7 @@ export default function HealoraPage() {
                 { icon: Mail, text: "sharmilifecoach04@gmail.com", href: "mailto:sharmilifecoach04@gmail.com" },
                 { icon: Instagram, text: "@sharmila.lifecoach", href: "https://www.instagram.com/sharmila.lifecoach" },
                 { icon: Youtube, text: "Spark and Shine with Sharmila", href: "https://www.youtube.com/@SparkandShinewithSharmila" },
-                { icon: Facebook, text: "Sharmila Ghulam Ali", href: "https://www.facebook.com/SharmilaGhulamAli" }
+                { icon: Facebook, text: "Sharmila Ghulam Ali", href: "https://www.facebook.com/profile.php?id=100011099827359&ref=PROFILE_EDIT_ig_profile_ac" }
               ].map((item) => (
                 <a 
                   key={item.text} 
@@ -389,7 +389,7 @@ export default function HealoraPage() {
               {[
                 { Icon: Instagram, href: "https://www.instagram.com/sharmila.lifecoach" },
                 { Icon: Youtube, href: "https://www.youtube.com/@SparkandShinewithSharmila" },
-                { Icon: Facebook, href: "https://www.facebook.com/SharmilaGhulamAli" },
+                { Icon: Facebook, href: "https://www.facebook.com/profile.php?id=100011099827359&ref=PROFILE_EDIT_ig_profile_ac" },
                 { Icon: Mail, href: "mailto:sharmilifecoach04@gmail.com" }
               ].map(({ Icon, href }, i) => (
                 <a key={i} href={href} target="_blank" className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center hover:bg-white hover:text-[var(--navy-deep)] transition-all">
