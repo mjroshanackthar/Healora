@@ -29,6 +29,9 @@ export default function HealoraPage() {
   const [scrolled, setScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeFaq, setActiveFaq] = useState<number | null>(null);
+  
+  // Form State
+  const [formStatus, setFormStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
 
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, {
@@ -45,6 +48,38 @@ export default function HealoraPage() {
   }, []);
 
   if (!mounted) return null;
+
+  const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setFormStatus('submitting');
+    
+    const formData = new FormData(e.currentTarget);
+    const data = Object.fromEntries(formData.entries());
+
+    try {
+      // Replace 'XXXXX' with your real Formspree ID once you have it
+      // For now, it will attempt a generic submission
+      const response = await fetch('https://formspree.io/f/XXXXX', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+          ...data,
+          _subject: `New Healora Message from ${data.name}`
+        })
+      });
+
+      if (response.ok) {
+        setFormStatus('success');
+      } else {
+        setFormStatus('error');
+      }
+    } catch (err) {
+      setFormStatus('error');
+    }
+  };
 
   const services = [
     {
@@ -348,21 +383,65 @@ export default function HealoraPage() {
 
           <div className="bg-white p-10 rounded-[32px] shadow-2xl shadow-[var(--shadow-blue)] border border-[var(--steel-blue)]/5">
             <h3 className="text-2xl font-serif text-[var(--navy-deep)] mb-8 underline decoration-[var(--steel-blue)]/10 underline-offset-4">Sacred Connection</h3>
-            <div className="space-y-6">
-              <div>
-                <label className="text-[0.65rem] font-bold tracking-[0.2em] text-[var(--steel-blue)] block mb-2 uppercase">Your Name</label>
-                <input type="text" className="w-full bg-[var(--watercolor-bg)]/50 border-0 rounded-xl px-4 py-3 placeholder:text-[var(--navy-primary)]/30 text-sm focus:ring-2 focus:ring-[var(--steel-blue)]/20 outline-none" placeholder="What shall I call you?" />
-              </div>
-              <div>
-                <label className="text-[0.65rem] font-bold tracking-[0.2em] text-[var(--steel-blue)] block mb-2 uppercase">Email Address</label>
-                <input type="email" className="w-full bg-[var(--watercolor-bg)]/50 border-0 rounded-xl px-4 py-3 placeholder:text-[var(--navy-primary)]/30 text-sm focus:ring-2 focus:ring-[var(--steel-blue)]/20 outline-none" placeholder="your@email.com" />
-              </div>
-              <div>
-                <label className="text-[0.65rem] font-bold tracking-[0.2em] text-[var(--steel-blue)] block mb-2 uppercase">Your Message</label>
-                <textarea className="w-full bg-[var(--watercolor-bg)]/50 border-0 rounded-xl px-4 py-3 placeholder:text-[var(--navy-primary)]/30 text-sm focus:ring-2 focus:ring-[var(--steel-blue)]/20 outline-none h-32" placeholder="Tell me a little about where you are right now..." />
-              </div>
-              <button className="btn-primary w-full justify-center py-4 bg-[var(--navy-deep)]">Send My Message</button>
-            </div>
+            
+            <AnimatePresence mode="wait">
+              {formStatus === 'success' ? (
+                <motion.div 
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  className="text-center py-10"
+                >
+                  <div className="w-16 h-16 rounded-full bg-[var(--leaf-green)]/10 text-[var(--leaf-green)] flex items-center justify-center mx-auto mb-6">
+                    <Sparkles className="w-8 h-8" />
+                  </div>
+                  <h4 className="text-xl font-serif text-[var(--navy-deep)] mb-3">Message Received ✨</h4>
+                  <p className="text-sm text-[var(--navy-primary)] opacity-80 font-light leading-relaxed">
+                    Thank you, your message has been safely delivered to Sharmila. We will connect with you shortly.
+                  </p>
+                  <button 
+                    onClick={() => setFormStatus('idle')}
+                    className="mt-8 text-[0.65rem] font-bold tracking-[0.2em] text-[var(--steel-blue)] uppercase hover:underline"
+                  >
+                    Send another message
+                  </button>
+                </motion.div>
+              ) : (
+                <motion.form 
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  onSubmit={handleFormSubmit} 
+                  className="space-y-6"
+                >
+                  <div>
+                    <label className="text-[0.65rem] font-bold tracking-[0.2em] text-[var(--steel-blue)] block mb-2 uppercase">Your Name</label>
+                    <input name="name" required type="text" className="w-full bg-[var(--watercolor-bg)]/50 border-0 rounded-xl px-4 py-3 placeholder:text-[var(--navy-primary)]/30 text-sm focus:ring-2 focus:ring-[var(--steel-blue)]/20 outline-none" placeholder="What shall I call you?" />
+                  </div>
+                  <div>
+                    <label className="text-[0.65rem] font-bold tracking-[0.2em] text-[var(--steel-blue)] block mb-2 uppercase">Email Address</label>
+                    <input name="email" required type="email" className="w-full bg-[var(--watercolor-bg)]/50 border-0 rounded-xl px-4 py-3 placeholder:text-[var(--navy-primary)]/30 text-sm focus:ring-2 focus:ring-[var(--steel-blue)]/20 outline-none" placeholder="your@email.com" />
+                  </div>
+                  <div>
+                    <label className="text-[0.65rem] font-bold tracking-[0.2em] text-[var(--steel-blue)] block mb-2 uppercase">Your Message</label>
+                    <textarea name="message" required className="w-full bg-[var(--watercolor-bg)]/50 border-0 rounded-xl px-4 py-3 placeholder:text-[var(--navy-primary)]/30 text-sm focus:ring-2 focus:ring-[var(--steel-blue)]/20 outline-none h-32" placeholder="Tell me a little about where you are right now..." />
+                  </div>
+                  
+                  {formStatus === 'error' && (
+                    <div className="text-xs text-red-500 font-medium bg-red-50 p-3 rounded-lg flex items-center gap-2">
+                       Something went wrong. Please try again!
+                    </div>
+                  )}
+
+                  <button 
+                    type="submit" 
+                    disabled={formStatus === 'submitting'}
+                    className="btn-primary w-full justify-center py-4 bg-[var(--navy-deep)] disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
+                    {formStatus === 'submitting' ? 'Sending Presence...' : 'Send My Message'}
+                  </button>
+                </motion.form>
+              )}
+            </AnimatePresence>
           </div>
         </div>
       </section>
