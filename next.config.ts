@@ -5,6 +5,8 @@ const nextConfig: NextConfig = {
   images: {
     unoptimized: true,
   },
+  basePath: '/Healora',
+  assetPrefix: '/Healora/',
   /* config options here */
 };
 
