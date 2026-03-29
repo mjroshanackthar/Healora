@@ -1,6 +1,4 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
 :root {
   --navy-deep: #1B2A4A;
@@ -18,22 +16,26 @@
 @layer base {
   body {
     @apply bg-[var(--mist-white)] text-[var(--navy-deep)] antialiased;
-    font-feature-settings: "ss01", "ss02", "cv01", "cv02";
+    font-size: 16px;
   }
 }
 
 @layer components {
   .section-label {
-    @apply flex items-center gap-2 text-[0.7rem] font-semibold tracking-[0.25em] uppercase text-[var(--steel-blue)] mb-4;
+    @apply mb-4 flex items-center gap-2 text-[0.7rem] font-semibold uppercase tracking-[0.25em] text-[var(--steel-blue)];
   }
   
   .section-label::before {
     content: '';
-    @apply block w-6 h-[1px] bg-[var(--steel-blue)];
+    @apply h-[1px] w-6 block bg-[var(--steel-blue)];
   }
 
   .btn-primary {
     @apply bg-[var(--navy-primary)] text-white px-8 py-3.5 rounded-full text-[0.85rem] font-medium tracking-[0.08em] uppercase transition-all duration-300 inline-flex items-center gap-2 hover:bg-[var(--steel-blue)] hover:-translate-y-0.5 hover:shadow-[0_8px_30px_rgba(44,74,124,0.3)];
+  }
+
+  .btn-whatsapp {
+    @apply bg-[var(--navy-deep)] text-white px-4 py-3.5 rounded-[12px] text-[0.85rem] font-medium tracking-[0.05em] transition-all duration-300 flex items-center justify-center gap-2 border-[1px] border-white/5 hover:bg-[var(--steel-blue)] hover:-translate-y-0.5 hover:shadow-[0_8px_25px_rgba(44,74,124,0.3)];
   }
 
   .btn-outline {
@@ -66,6 +68,6 @@
 }
 
 @keyframes waPulse {
-  0%, 100% { box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4); }
-  50% { box-shadow: 0 4px 40px rgba(37, 211, 102, 0.6), 0 0 0 10px rgba(37, 211, 102, 0.05); }
+  0%, 100% { box-shadow: 0 4px 20px rgba(44, 74, 124, 0.3); }
+  50% { box-shadow: 0 4px 40px rgba(74, 122, 172, 0.4), 0 0 0 10px rgba(74, 122, 172, 0.05); }
 }

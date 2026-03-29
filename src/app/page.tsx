@@ -324,7 +324,8 @@ export default function HealoraPage() {
                 { icon: Phone, text: "+91 7416 010 351 (WhatsApp)", href: "https://wa.me/917416010351?text=I%E2%80%99m%20ready%20to%20begin%20my%20healing%20journey%20with%20you." },
                 { icon: Mail, text: "sharmilifecoach04@gmail.com", href: "mailto:sharmilifecoach04@gmail.com" },
                 { icon: Instagram, text: "@sharmila.lifecoach", href: "https://www.instagram.com/sharmila.lifecoach" },
-                { icon: Youtube, text: "Spark and Shine with Sharmila", href: "https://www.youtube.com/@SparkandShinewithSharmila" }
+                { icon: Youtube, text: "Spark and Shine with Sharmila", href: "https://www.youtube.com/@SparkandShinewithSharmila" },
+                { icon: Facebook, text: "Sharmila Ghulam Ali", href: "https://www.facebook.com/SharmilaGhulamAli" }
               ].map((item) => (
                 <a 
                   key={item.text} 
@@ -385,8 +386,13 @@ export default function HealoraPage() {
           <div>
             <h4 className="text-white text-[0.65rem] font-bold tracking-[0.2em] uppercase mb-8">Social Connection</h4>
             <div className="flex gap-4">
-              {[Instagram, Youtube, Facebook, Mail].map((Icon, i) => (
-                <a key={i} href="#" className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center hover:bg-white hover:text-[var(--navy-deep)] transition-all">
+              {[
+                { Icon: Instagram, href: "https://www.instagram.com/sharmila.lifecoach" },
+                { Icon: Youtube, href: "https://www.youtube.com/@SparkandShinewithSharmila" },
+                { Icon: Facebook, href: "https://www.facebook.com/SharmilaGhulamAli" },
+                { Icon: Mail, href: "mailto:sharmilifecoach04@gmail.com" }
+              ].map(({ Icon, href }, i) => (
+                <a key={i} href={href} target="_blank" className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center hover:bg-white hover:text-[var(--navy-deep)] transition-all">
                   <Icon className="w-4 h-4" />
                 </a>
               ))}
