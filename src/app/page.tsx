@@ -360,7 +360,7 @@ export default function HealoraPage() {
             <div className="space-y-6">
               {[
                 { icon: Phone, text: "+91 7416 010 351 (WhatsApp)", href: "https://wa.me/917416010351?text=I%E2%80%99m%20ready%20to%20begin%20my%20healing%20journey%20with%20you." },
-                { icon: Mail, text: "sharmilifecoach04@gmail.com", href: "mailto:sharmilifecoach04@gmail.com" },
+                { icon: Mail, text: "sharmilalifecoach04@gmail.com", href: "mailto:sharmilalifecoach04@gmail.com" },
                 { icon: Instagram, text: "@sharmila.lifecoach", href: "https://www.instagram.com/sharmila.lifecoach" },
                 { icon: Youtube, text: "Spark and Shine with Sharmila", href: "https://www.youtube.com/@SparkandShinewithSharmila" },
                 { icon: Facebook, text: "Sharmila Ghulam Ali", href: "https://www.facebook.com/profile.php?id=100011099827359&ref=PROFILE_EDIT_ig_profile_ac" },
@@ -474,7 +474,7 @@ export default function HealoraPage() {
                 { Icon: Youtube, href: "https://www.youtube.com/@SparkandShinewithSharmila" },
                 { Icon: Facebook, href: "https://www.facebook.com/profile.php?id=100011099827359&ref=PROFILE_EDIT_ig_profile_ac" },
                 { Icon: Linkedin, href: "https://www.linkedin.com/in/sharmila-ghulaumali-7a47173b0/" },
-                { Icon: Mail, href: "mailto:sharmilifecoach04@gmail.com" }
+                { Icon: Mail, href: "mailto:sharmilalifecoach04@gmail.com" }
               ].map(({ Icon, href }, i) => (
                 <a key={i} href={href} target="_blank" className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center hover:bg-white hover:text-[var(--navy-deep)] transition-all">
                   <Icon className="w-4 h-4" />
