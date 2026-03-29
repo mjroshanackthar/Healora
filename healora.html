@@ -1,0 +1,2865 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Healora — Spark • Shine • Sustain | G. A. Sharmila</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --navy-deep: #1B2A4A;
+      --navy-primary: #2C4A7C;
+      --steel-blue: #4A7AAC;
+      --sky-soft: #7BA7CC;
+      --watercolor-bg: #F0F4F8;
+      --mist-white: #FAFCFF;
+      --leaf-green: #5C8A5C;
+      --glass: rgba(255, 255, 255, 0.15);
+      --glass-border: rgba(74, 122, 172, 0.2);
+      --shadow-blue: rgba(44, 74, 124, 0.12);
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--mist-white);
+      color: var(--navy-deep);
+      overflow-x: hidden;
+      cursor: none;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4 {
+      font-family: 'Cormorant Garamond', serif;
+    }
+
+    /* Custom scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: var(--watercolor-bg);
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: var(--steel-blue);
+      border-radius: 3px;
+    }
+
+    /* Custom cursor */
+    #cursor {
+      position: fixed;
+      width: 16px;
+      height: 16px;
+      background: var(--steel-blue);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9999;
+      mix-blend-mode: multiply;
+      transition: transform 0.15s ease, width 0.2s ease, height 0.2s ease;
+      transform: translate(-50%, -50%);
+    }
+
+    #cursor-ring {
+      position: fixed;
+      width: 40px;
+      height: 40px;
+      border: 1.5px solid var(--steel-blue);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9998;
+      opacity: 0.4;
+      transition: transform 0.4s ease, opacity 0.3s;
+      transform: translate(-50%, -50%);
+    }
+
+    /* PAGE LOADER */
+    #loader {
+      position: fixed;
+      inset: 0;
+      background: var(--navy-deep);
+      z-index: 10000;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      transition: opacity 0.8s ease, visibility 0.8s;
+    }
+
+    #loader.hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .loader-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      font-weight: 300;
+      color: var(--mist-white);
+      letter-spacing: 0.3em;
+      animation: logoReveal 1.2s ease forwards;
+    }
+
+    .loader-tagline {
+      font-size: 0.85rem;
+      font-weight: 300;
+      color: var(--sky-soft);
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      margin-top: 0.75rem;
+      animation: fadeUp 1s 0.5s ease forwards;
+      opacity: 0;
+    }
+
+    .loader-bar {
+      width: 120px;
+      height: 1px;
+      background: rgba(255, 255, 255, 0.15);
+      margin-top: 2rem;
+      overflow: hidden;
+    }
+
+    .loader-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--sky-soft), var(--steel-blue));
+      animation: barLoad 1.8s ease forwards;
+      width: 0;
+    }
+
+    @keyframes logoReveal {
+      from {
+        opacity: 0;
+        letter-spacing: 0.6em;
+      }
+
+      to {
+        opacity: 1;
+        letter-spacing: 0.3em;
+      }
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes barLoad {
+      to {
+        width: 100%;
+      }
+    }
+
+    /* NAVBAR */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      padding: 1.25rem 5%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: all 0.4s ease;
+    }
+
+    nav.scrolled {
+      background: rgba(250, 252, 255, 0.92);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--glass-border);
+      padding: 0.9rem 5%;
+      box-shadow: 0 4px 30px var(--shadow-blue);
+    }
+
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.6rem;
+      font-weight: 500;
+      color: var(--navy-deep);
+      text-decoration: none;
+      letter-spacing: 0.08em;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .nav-logo span {
+      color: var(--steel-blue);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.82rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--navy-primary);
+      text-decoration: none;
+      position: relative;
+      transition: color 0.3s;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 1.5px;
+      background: var(--steel-blue);
+      transition: width 0.3s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--steel-blue);
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .nav-cta {
+      background: var(--navy-primary);
+      color: var(--mist-white) !important;
+      padding: 0.5rem 1.2rem !important;
+      border-radius: 100px !important;
+      transition: background 0.3s ease, transform 0.2s !important;
+    }
+
+    .nav-cta:hover {
+      background: var(--steel-blue) !important;
+      transform: translateY(-1px);
+    }
+
+    .nav-cta::after {
+      display: none !important;
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 1.5px;
+      background: var(--navy-deep);
+      transition: all 0.3s;
+    }
+
+    /* Mobile menu */
+    #mobile-menu {
+      position: fixed;
+      inset: 0;
+      background: var(--navy-deep);
+      z-index: 999;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2rem;
+      transform: translateX(100%);
+      transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    #mobile-menu.open {
+      transform: translateX(0);
+    }
+
+    #mobile-menu a {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.5rem;
+      color: var(--mist-white);
+      text-decoration: none;
+      letter-spacing: 0.05em;
+      transition: color 0.3s;
+      opacity: 0;
+      transform: translateX(30px);
+      transition: opacity 0.3s ease, transform 0.3s ease, color 0.3s;
+    }
+
+    #mobile-menu.open a {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    #mobile-menu.open a:nth-child(1) {
+      transition-delay: 0.1s;
+    }
+
+    #mobile-menu.open a:nth-child(2) {
+      transition-delay: 0.15s;
+    }
+
+    #mobile-menu.open a:nth-child(3) {
+      transition-delay: 0.2s;
+    }
+
+    #mobile-menu.open a:nth-child(4) {
+      transition-delay: 0.25s;
+    }
+
+    #mobile-menu.open a:nth-child(5) {
+      transition-delay: 0.3s;
+    }
+
+    #mobile-menu.open a:nth-child(6) {
+      transition-delay: 0.35s;
+    }
+
+    #mobile-menu a:hover {
+      color: var(--sky-soft);
+    }
+
+    /* HERO */
+    #hero {
+      position: relative;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      background: var(--mist-white);
+    }
+
+    #hero-canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      max-width: 800px;
+      padding: 0 2rem;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(74, 122, 172, 0.1);
+      border: 1px solid rgba(74, 122, 172, 0.25);
+      border-radius: 100px;
+      padding: 0.4rem 1rem;
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--steel-blue);
+      margin-bottom: 1.5rem;
+      animation: fadeUp 0.8s 2s ease forwards;
+      opacity: 0;
+    }
+
+    .hero-title {
+      font-size: clamp(3.5rem, 8vw, 7rem);
+      font-weight: 300;
+      color: var(--navy-deep);
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.2rem;
+      animation: heroTitle 1s 2.2s ease forwards;
+      opacity: 0;
+      transform: translateY(30px);
+    }
+
+    .hero-title em {
+      font-style: italic;
+      color: var(--steel-blue);
+    }
+
+    .hero-subtitle {
+      font-size: clamp(1rem, 2.2vw, 1.25rem);
+      font-weight: 300;
+      color: var(--navy-primary);
+      line-height: 1.7;
+      max-width: 550px;
+      margin: 0 auto 2.5rem;
+      animation: fadeUp 0.8s 2.5s ease forwards;
+      opacity: 0;
+    }
+
+    .hero-tagline {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+      font-weight: 400;
+      font-style: italic;
+      color: var(--steel-blue);
+      letter-spacing: 0.08em;
+      margin-bottom: 2.5rem;
+      animation: fadeUp 0.8s 2.7s ease forwards;
+      opacity: 0;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      animation: fadeUp 0.8s 2.9s ease forwards;
+      opacity: 0;
+    }
+
+    .btn-primary {
+      background: var(--navy-primary);
+      color: white;
+      padding: 0.85rem 2rem;
+      border-radius: 100px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-decoration: none;
+      text-transform: uppercase;
+      transition: all 0.3s ease;
+      border: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .btn-primary:hover {
+      background: var(--steel-blue);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(44, 74, 124, 0.3);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--navy-primary);
+      padding: 0.85rem 2rem;
+      border-radius: 100px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-decoration: none;
+      text-transform: uppercase;
+      border: 1.5px solid var(--navy-primary);
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .btn-outline:hover {
+      background: var(--navy-primary);
+      color: white;
+      transform: translateY(-2px);
+    }
+
+    .hero-scroll-hint {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      animation: fadeUp 0.8s 3.2s ease forwards;
+      opacity: 0;
+    }
+
+    .scroll-line {
+      width: 1px;
+      height: 50px;
+      background: linear-gradient(to bottom, var(--steel-blue), transparent);
+      animation: scrollLine 2s 3.5s ease infinite;
+    }
+
+    @keyframes scrollLine {
+      0% {
+        transform: scaleY(0);
+        transform-origin: top;
+        opacity: 1;
+      }
+
+      50% {
+        transform: scaleY(1);
+        transform-origin: top;
+      }
+
+      100% {
+        transform: scaleY(1);
+        transform-origin: bottom;
+        opacity: 0;
+      }
+    }
+
+    .scroll-hint-text {
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--sky-soft);
+    }
+
+    @keyframes heroTitle {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* SECTION COMMON */
+    section {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .section-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--steel-blue);
+      margin-bottom: 1rem;
+    }
+
+    .section-label::before {
+      content: '';
+      display: block;
+      width: 24px;
+      height: 1px;
+      background: var(--steel-blue);
+    }
+
+    .section-title {
+      font-size: clamp(2.2rem, 5vw, 3.8rem);
+      font-weight: 300;
+      line-height: 1.15;
+      color: var(--navy-deep);
+      margin-bottom: 1rem;
+    }
+
+    .section-title em {
+      font-style: italic;
+      color: var(--steel-blue);
+    }
+
+    .section-subtitle {
+      font-size: 1rem;
+      font-weight: 300;
+      line-height: 1.8;
+      color: var(--navy-primary);
+      max-width: 540px;
+    }
+
+    /* WAVE DIVIDERS */
+    .wave-divider {
+      display: block;
+      width: 100%;
+      overflow: hidden;
+      line-height: 0;
+    }
+
+    .wave-divider svg {
+      display: block;
+      width: 100%;
+    }
+
+    /* ABOUT */
+    #about {
+      padding: 7rem 5%;
+      background: var(--watercolor-bg);
+      position: relative;
+    }
+
+    .about-blob {
+      position: absolute;
+      width: 500px;
+      height: 500px;
+      border-radius: 60% 40% 50% 60% / 50% 60% 40% 50%;
+      background: radial-gradient(ellipse, rgba(123, 167, 204, 0.12) 0%, transparent 70%);
+      right: -100px;
+      top: -50px;
+      animation: blobFloat 8s ease-in-out infinite;
+    }
+
+    @keyframes blobFloat {
+
+      0%,
+      100% {
+        transform: scale(1) rotate(0deg);
+      }
+
+      50% {
+        transform: scale(1.05) rotate(5deg);
+      }
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 5rem;
+      align-items: center;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .about-photo-wrap {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .about-photo-ring {
+      position: absolute;
+      width: 380px;
+      height: 380px;
+      border-radius: 50%;
+      border: 1px solid rgba(74, 122, 172, 0.25);
+      animation: ringPulse 3s ease-in-out infinite;
+    }
+
+    .about-photo-ring:nth-child(2) {
+      width: 420px;
+      height: 420px;
+      animation-delay: 0.5s;
+      opacity: 0.5;
+    }
+
+    .about-photo-ring:nth-child(3) {
+      width: 460px;
+      height: 460px;
+      animation-delay: 1s;
+      opacity: 0.25;
+    }
+
+    @keyframes ringPulse {
+
+      0%,
+      100% {
+        transform: scale(1);
+        opacity: 0.6;
+      }
+
+      50% {
+        transform: scale(1.02);
+        opacity: 1;
+      }
+    }
+
+    .about-photo-frame {
+      width: 340px;
+      height: 340px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 3px solid rgba(74, 122, 172, 0.3);
+      box-shadow: 0 20px 60px rgba(44, 74, 124, 0.2), inset 0 0 30px rgba(123, 167, 204, 0.1);
+      position: relative;
+      z-index: 1;
+      background: linear-gradient(135deg, var(--sky-soft) 0%, var(--navy-primary) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .about-photo-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: 22% 40%;
+    }
+
+    .about-content {
+      position: relative;
+    }
+
+    .about-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(44, 74, 124, 0.08);
+      border: 1px solid rgba(44, 74, 124, 0.2);
+      border-radius: 100px;
+      padding: 0.5rem 1rem;
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      color: var(--navy-primary);
+      margin-bottom: 1.5rem;
+      text-transform: uppercase;
+    }
+
+    .about-name {
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 400;
+      color: var(--navy-deep);
+      line-height: 1.1;
+      margin-bottom: 0.5rem;
+    }
+
+    .about-role {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.15rem;
+      font-style: italic;
+      color: var(--steel-blue);
+      margin-bottom: 1.8rem;
+    }
+
+    .about-text {
+      font-size: 1rem;
+      line-height: 1.9;
+      color: var(--navy-primary);
+      margin-bottom: 1.2rem;
+      font-weight: 300;
+    }
+
+    .about-text strong {
+      font-weight: 500;
+      color: var(--navy-deep);
+    }
+
+    .about-text .highlight {
+      color: var(--steel-blue);
+      font-style: italic;
+    }
+
+    .about-leaf {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      color: var(--leaf-green);
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+    }
+
+    .laurel-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      padding: 2rem 0;
+      color: var(--sky-soft);
+      font-size: 1.2rem;
+      letter-spacing: 0.3em;
+    }
+
+    .laurel-divider::before,
+    .laurel-divider::after {
+      content: '❧';
+      font-size: 1.5rem;
+      opacity: 0.4;
+    }
+
+    /* HELP CARDS */
+    #help {
+      padding: 7rem 5%;
+      background: var(--mist-white);
+      position: relative;
+    }
+
+    .help-blob {
+      position: absolute;
+      width: 600px;
+      height: 600px;
+      border-radius: 50% 40% 60% 50%;
+      background: radial-gradient(ellipse, rgba(74, 122, 172, 0.07) 0%, transparent 70%);
+      left: -200px;
+      top: 50%;
+      transform: translateY(-50%);
+      pointer-events: none;
+    }
+
+    .help-header {
+      text-align: center;
+      max-width: 600px;
+      margin: 0 auto 4rem;
+    }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .glass-card {
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--glass-border);
+      border-radius: 20px;
+      padding: 2.5rem 2rem;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+      will-change: transform;
+    }
+
+    .glass-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(123, 167, 204, 0.08), transparent);
+      transition: left 0.6s ease;
+    }
+
+    .glass-card:hover::before {
+      left: 100%;
+    }
+
+    .glass-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 60px rgba(44, 74, 124, 0.15), 0 0 0 1px rgba(74, 122, 172, 0.3);
+    }
+
+    .card-icon {
+      width: 52px;
+      height: 52px;
+      background: linear-gradient(135deg, rgba(74, 122, 172, 0.1), rgba(123, 167, 204, 0.15));
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.5rem;
+      font-size: 1.5rem;
+    }
+
+    .card-number {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3.5rem;
+      font-weight: 300;
+      color: rgba(74, 122, 172, 0.12);
+      position: absolute;
+      top: 1rem;
+      right: 1.5rem;
+      line-height: 1;
+    }
+
+    .card-title {
+      font-size: 1.2rem;
+      font-weight: 500;
+      color: var(--navy-deep);
+      margin-bottom: 0.75rem;
+      line-height: 1.3;
+    }
+
+    .card-text {
+      font-size: 0.9rem;
+      line-height: 1.75;
+      color: var(--navy-primary);
+      font-weight: 300;
+    }
+
+    /* SERVICES */
+    #services {
+      padding: 7rem 5%;
+      background: var(--watercolor-bg);
+    }
+
+    .services-header {
+      text-align: center;
+      max-width: 600px;
+      margin: 0 auto 4rem;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .service-card {
+      background: var(--mist-white);
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid rgba(44, 74, 124, 0.1);
+      transition: all 0.4s ease;
+      will-change: transform;
+    }
+
+    .service-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 24px 60px rgba(44, 74, 124, 0.12);
+    }
+
+    .service-top {
+      height: 5px;
+      background: linear-gradient(90deg, var(--navy-primary), var(--steel-blue));
+    }
+
+    .service-body {
+      padding: 2.5rem 2rem;
+    }
+
+    .service-tag {
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--steel-blue);
+      margin-bottom: 1rem;
+    }
+
+    .service-name {
+      font-size: 1.5rem;
+      font-weight: 400;
+      color: var(--navy-deep);
+      margin-bottom: 1rem;
+      line-height: 1.2;
+    }
+
+    .service-desc {
+      font-size: 0.9rem;
+      line-height: 1.8;
+      color: var(--navy-primary);
+      font-weight: 300;
+      margin-bottom: 2rem;
+    }
+
+    .service-features {
+      list-style: none;
+      margin-bottom: 2rem;
+    }
+
+    .service-features li {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.85rem;
+      color: var(--navy-primary);
+      padding: 0.4rem 0;
+      border-bottom: 1px solid rgba(74, 122, 172, 0.08);
+    }
+
+    .service-features li::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--leaf-green);
+      flex-shrink: 0;
+    }
+
+    .btn-whatsapp {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      width: 100%;
+      padding: 0.9rem;
+      background: #25D366;
+      color: white;
+      border-radius: 12px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn-whatsapp:hover {
+      background: #1ebe57;
+      transform: translateY(-1px);
+      box-shadow: 0 8px 25px rgba(37, 211, 102, 0.3);
+    }
+
+    /* HOW IT WORKS */
+    #how {
+      padding: 7rem 5%;
+      background: var(--mist-white);
+    }
+
+    .how-header {
+      text-align: center;
+      max-width: 600px;
+      margin: 0 auto 5rem;
+    }
+
+    .timeline {
+      max-width: 900px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 0;
+      bottom: 0;
+      width: 1px;
+      background: linear-gradient(to bottom, transparent, var(--sky-soft), transparent);
+      transform: translateX(-50%);
+    }
+
+    .timeline-item {
+      display: grid;
+      grid-template-columns: 1fr 60px 1fr;
+      gap: 2rem;
+      align-items: center;
+      margin-bottom: 4rem;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .timeline-item.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .timeline-item:nth-child(odd) .timeline-content {
+      grid-column: 1;
+      text-align: right;
+    }
+
+    .timeline-item:nth-child(odd) .timeline-dot {
+      grid-column: 2;
+    }
+
+    .timeline-item:nth-child(odd) .timeline-empty {
+      grid-column: 3;
+    }
+
+    .timeline-item:nth-child(even) .timeline-empty {
+      grid-column: 1;
+    }
+
+    .timeline-item:nth-child(even) .timeline-dot {
+      grid-column: 2;
+    }
+
+    .timeline-item:nth-child(even) .timeline-content {
+      grid-column: 3;
+      text-align: left;
+    }
+
+    .timeline-dot {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--navy-primary), var(--steel-blue));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem;
+      font-weight: 400;
+      box-shadow: 0 8px 25px rgba(44, 74, 124, 0.25);
+      margin: 0 auto;
+      flex-shrink: 0;
+    }
+
+    .timeline-step {
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--steel-blue);
+      margin-bottom: 0.5rem;
+    }
+
+    .timeline-title {
+      font-size: 1.3rem;
+      font-weight: 400;
+      color: var(--navy-deep);
+      margin-bottom: 0.75rem;
+    }
+
+    .timeline-desc {
+      font-size: 0.9rem;
+      line-height: 1.75;
+      color: var(--navy-primary);
+      font-weight: 300;
+    }
+
+    /* STATS */
+    #stats {
+      padding: 6rem 5%;
+      background: var(--navy-deep);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .stats-bg-text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 20rem;
+      font-weight: 300;
+      color: rgba(255, 255, 255, 0.02);
+      white-space: nowrap;
+      pointer-events: none;
+      letter-spacing: 0.2em;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+      max-width: 1000px;
+      margin: 0 auto;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .stat-item {
+      padding: 2rem;
+    }
+
+    .stat-number {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3rem, 6vw, 5rem);
+      font-weight: 300;
+      color: var(--mist-white);
+      line-height: 1;
+      margin-bottom: 0.5rem;
+      display: block;
+    }
+
+    .stat-number span {
+      color: var(--sky-soft);
+    }
+
+    .stat-label {
+      font-size: 0.8rem;
+      font-weight: 400;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(240, 244, 248, 0.5);
+    }
+
+    /* TESTIMONIALS */
+    #testimonials {
+      padding: 7rem 5%;
+      background: var(--watercolor-bg);
+    }
+
+    .testi-header {
+      text-align: center;
+      max-width: 600px;
+      margin: 0 auto 4rem;
+    }
+
+    .testi-carousel {
+      max-width: 1100px;
+      margin: 0 auto;
+      overflow: hidden;
+    }
+
+    .testi-track {
+      display: flex;
+      gap: 1.5rem;
+      transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .testi-card {
+      min-width: 360px;
+      background: rgba(255, 255, 255, 0.75);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--glass-border);
+      border-radius: 20px;
+      padding: 2.5rem;
+      position: relative;
+      flex-shrink: 0;
+    }
+
+    .testi-quote-icon {
+      position: absolute;
+      top: 1.5rem;
+      right: 2rem;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 5rem;
+      line-height: 1;
+      color: rgba(74, 122, 172, 0.12);
+      font-weight: 700;
+    }
+
+    .testi-stars {
+      display: flex;
+      gap: 0.25rem;
+      margin-bottom: 1.25rem;
+      color: var(--steel-blue);
+    }
+
+    .testi-text {
+      font-size: 0.95rem;
+      line-height: 1.85;
+      color: var(--navy-primary);
+      font-weight: 300;
+      font-style: italic;
+      margin-bottom: 2rem;
+    }
+
+    .testi-author {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .testi-avatar {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--sky-soft), var(--navy-primary));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 500;
+      font-size: 0.85rem;
+      color: white;
+    }
+
+    .testi-name {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--navy-deep);
+      margin-bottom: 0.2rem;
+    }
+
+    .testi-loc {
+      font-size: 0.75rem;
+      color: var(--sky-soft);
+      font-weight: 400;
+    }
+
+    .carousel-nav {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: 2.5rem;
+    }
+
+    .carousel-btn {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(44, 74, 124, 0.2);
+      background: transparent;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s;
+      color: var(--navy-primary);
+    }
+
+    .carousel-btn:hover {
+      background: var(--navy-primary);
+      color: white;
+      border-color: var(--navy-primary);
+    }
+
+    .carousel-dots {
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+      margin: 1.5rem auto 0;
+      justify-content: center;
+    }
+
+    .carousel-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: rgba(44, 74, 124, 0.2);
+      transition: all 0.3s;
+      cursor: pointer;
+      border: none;
+    }
+
+    .carousel-dot.active {
+      background: var(--steel-blue);
+      width: 20px;
+      border-radius: 3px;
+    }
+
+    /* FAQ */
+    #faq {
+      padding: 7rem 5%;
+      background: var(--mist-white);
+    }
+
+    .faq-header {
+      text-align: center;
+      max-width: 600px;
+      margin: 0 auto 4rem;
+    }
+
+    .faq-list {
+      max-width: 760px;
+      margin: 0 auto;
+    }
+
+    .faq-item {
+      border-bottom: 1px solid rgba(74, 122, 172, 0.12);
+      overflow: hidden;
+    }
+
+    .faq-question {
+      width: 100%;
+      text-align: left;
+      padding: 1.5rem 0;
+      background: none;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem;
+      font-weight: 400;
+      color: var(--navy-deep);
+      transition: color 0.3s;
+    }
+
+    .faq-question:hover {
+      color: var(--steel-blue);
+    }
+
+    .faq-icon {
+      width: 24px;
+      height: 24px;
+      flex-shrink: 0;
+      border-radius: 50%;
+      border: 1.5px solid rgba(74, 122, 172, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s;
+      color: var(--steel-blue);
+      font-size: 1rem;
+    }
+
+    .faq-item.open .faq-icon {
+      background: var(--navy-primary);
+      border-color: var(--navy-primary);
+      color: white;
+      transform: rotate(45deg);
+    }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), padding 0.3s;
+    }
+
+    .faq-item.open .faq-answer {
+      max-height: 400px;
+    }
+
+    .faq-answer-inner {
+      padding: 0 0 1.5rem 0;
+      font-size: 0.95rem;
+      line-height: 1.85;
+      color: var(--navy-primary);
+      font-weight: 300;
+      border-left: 3px solid var(--steel-blue);
+      padding-left: 1.25rem;
+      margin-left: 0.25rem;
+    }
+
+    /* CONTACT */
+    #contact {
+      padding: 7rem 5%;
+      background: var(--watercolor-bg);
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 5rem;
+      max-width: 1100px;
+      margin: 0 auto;
+      align-items: start;
+    }
+
+    .contact-info {
+      padding-top: 1rem;
+    }
+
+    .contact-tagline {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+      font-style: italic;
+      color: var(--steel-blue);
+      margin-bottom: 2rem;
+      line-height: 1.6;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.25rem;
+      font-size: 0.9rem;
+      color: var(--navy-primary);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .contact-item:hover {
+      color: var(--steel-blue);
+    }
+
+    .contact-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      background: rgba(74, 122, 172, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 1rem;
+      transition: background 0.3s;
+    }
+
+    .contact-item:hover .contact-icon {
+      background: rgba(74, 122, 172, 0.2);
+    }
+
+    .social-links {
+      display: flex;
+      gap: 1rem;
+      margin-top: 2.5rem;
+      flex-wrap: wrap;
+    }
+
+    .social-link {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      border: 1.5px solid rgba(74, 122, 172, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      color: var(--navy-primary);
+      font-size: 0.9rem;
+      transition: all 0.3s;
+    }
+
+    .social-link:hover {
+      background: var(--navy-primary);
+      color: white;
+      border-color: var(--navy-primary);
+    }
+
+    /* FORM */
+    .contact-form {
+      position: relative;
+    }
+
+    .form-group {
+      position: relative;
+      margin-bottom: 1.5rem;
+    }
+
+    .form-label {
+      display: block;
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--steel-blue);
+      margin-bottom: 0.5rem;
+    }
+
+    .form-input,
+    .form-textarea,
+    .form-select {
+      width: 100%;
+      padding: 0.9rem 1.1rem;
+      background: rgba(255, 255, 255, 0.8);
+      border: 1.5px solid rgba(74, 122, 172, 0.15);
+      border-radius: 12px;
+      font-size: 0.95rem;
+      color: var(--navy-deep);
+      font-family: 'Inter', sans-serif;
+      transition: all 0.3s ease;
+      outline: none;
+      backdrop-filter: blur(10px);
+    }
+
+    .form-input:focus,
+    .form-textarea:focus,
+    .form-select:focus {
+      border-color: var(--steel-blue);
+      box-shadow: 0 0 0 4px rgba(74, 122, 172, 0.1);
+      background: rgba(255, 255, 255, 0.95);
+    }
+
+    .form-textarea {
+      resize: vertical;
+      min-height: 140px;
+    }
+
+    .form-error {
+      font-size: 0.75rem;
+      color: #c0392b;
+      margin-top: 0.3rem;
+      display: none;
+    }
+
+    .form-group.error .form-error {
+      display: block;
+    }
+
+    .form-group.error .form-input,
+    .form-group.error .form-textarea {
+      border-color: rgba(192, 57, 43, 0.4);
+    }
+
+    .form-success {
+      display: none;
+      text-align: center;
+      padding: 3rem;
+      background: rgba(92, 138, 92, 0.08);
+      border-radius: 16px;
+      border: 1px solid rgba(92, 138, 92, 0.2);
+    }
+
+    .form-success.show {
+      display: block;
+    }
+
+    .form-success h3 {
+      font-size: 1.5rem;
+      color: var(--navy-deep);
+      margin-bottom: 0.5rem;
+    }
+
+    .form-success p {
+      font-size: 0.9rem;
+      color: var(--navy-primary);
+      font-weight: 300;
+    }
+
+    /* FOOTER */
+    footer {
+      background: var(--navy-deep);
+      padding: 4rem 5% 2rem;
+      color: rgba(240, 244, 248, 0.6);
+    }
+
+    .footer-top {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr;
+      gap: 3rem;
+      padding-bottom: 3rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      margin-bottom: 2rem;
+    }
+
+    .footer-brand-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem;
+      font-weight: 300;
+      color: var(--mist-white);
+      letter-spacing: 0.08em;
+      margin-bottom: 0.5rem;
+    }
+
+    .footer-brand-tag {
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--sky-soft);
+      margin-bottom: 1.25rem;
+    }
+
+    .footer-brand-desc {
+      font-size: 0.85rem;
+      line-height: 1.8;
+      font-weight: 300;
+      max-width: 280px;
+    }
+
+    .footer-col h4 {
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--mist-white);
+      margin-bottom: 1.25rem;
+    }
+
+    .footer-col ul {
+      list-style: none;
+    }
+
+    .footer-col ul li {
+      margin-bottom: 0.7rem;
+    }
+
+    .footer-col ul li a {
+      font-size: 0.85rem;
+      color: rgba(240, 244, 248, 0.5);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .footer-col ul li a:hover {
+      color: var(--sky-soft);
+    }
+
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      font-size: 0.8rem;
+    }
+
+    .footer-copy {
+      color: rgba(240, 244, 248, 0.35);
+    }
+
+    .footer-tagline {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      color: var(--sky-soft);
+      font-size: 0.9rem;
+      letter-spacing: 0.05em;
+    }
+
+    /* FLOATING WHATSAPP */
+    #whatsapp-float {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      z-index: 500;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 0.5rem;
+    }
+
+    .wa-tooltip {
+      background: var(--navy-deep);
+      color: white;
+      font-size: 0.8rem;
+      padding: 0.5rem 0.9rem;
+      border-radius: 100px;
+      white-space: nowrap;
+      opacity: 0;
+      transform: translateX(10px);
+      transition: all 0.3s;
+      pointer-events: none;
+    }
+
+    #whatsapp-float:hover .wa-tooltip {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .wa-btn {
+      width: 56px;
+      height: 56px;
+      background: #25D366;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+      animation: waPulse 2.5s ease-in-out infinite;
+      transition: transform 0.3s;
+    }
+
+    .wa-btn:hover {
+      transform: scale(1.1);
+    }
+
+    .wa-btn svg {
+      width: 28px;
+      height: 28px;
+      fill: white;
+    }
+
+    @keyframes waPulse {
+
+      0%,
+      100% {
+        box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+      }
+
+      50% {
+        box-shadow: 0 4px 40px rgba(37, 211, 102, 0.6), 0 0 0 10px rgba(37, 211, 102, 0.05);
+      }
+    }
+
+    /* SCROLL TO TOP */
+    #scroll-top {
+      position: fixed;
+      bottom: 5.5rem;
+      right: 2rem;
+      z-index: 500;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--navy-primary);
+      color: white;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 15px rgba(44, 74, 124, 0.25);
+      opacity: 0;
+      transform: translateY(10px);
+      transition: all 0.3s ease;
+      pointer-events: none;
+    }
+
+    #scroll-top.visible {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: all;
+    }
+
+    #scroll-top:hover {
+      background: var(--steel-blue);
+    }
+
+    /* INTERSECTION ANIMATIONS */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal-left {
+      opacity: 0;
+      transform: translateX(-30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .reveal-left.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .reveal-right {
+      opacity: 0;
+      transform: translateX(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .reveal-right.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .stagger-1 {
+      transition-delay: 0.1s;
+    }
+
+    .stagger-2 {
+      transition-delay: 0.2s;
+    }
+
+    .stagger-3 {
+      transition-delay: 0.3s;
+    }
+
+    .stagger-4 {
+      transition-delay: 0.4s;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      .nav-links {
+        display: none;
+      }
+
+      .hamburger {
+        display: flex;
+      }
+
+      .about-grid {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+      }
+
+      .about-photo-wrap {
+        order: -1;
+      }
+
+      .about-photo-frame {
+        width: 240px;
+        height: 240px;
+        font-size: 4rem;
+      }
+
+      .about-photo-ring {
+        width: 270px;
+        height: 270px;
+      }
+
+      .about-photo-ring:nth-child(2) {
+        width: 300px;
+        height: 300px;
+      }
+
+      .about-photo-ring:nth-child(3) {
+        width: 330px;
+        height: 330px;
+      }
+
+      .contact-grid {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+      }
+
+      .footer-top {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+
+      .timeline::before {
+        left: 30px;
+      }
+
+      .timeline-item {
+        grid-template-columns: 60px 1fr;
+      }
+
+      .timeline-item:nth-child(odd) .timeline-content,
+      .timeline-item:nth-child(even) .timeline-content {
+        grid-column: 2;
+        text-align: left;
+      }
+
+      .timeline-item:nth-child(odd) .timeline-dot,
+      .timeline-item:nth-child(even) .timeline-dot {
+        grid-column: 1;
+      }
+
+      .timeline-item:nth-child(odd) .timeline-empty,
+      .timeline-item:nth-child(even) .timeline-empty {
+        display: none;
+      }
+
+      .testi-card {
+        min-width: 300px;
+      }
+
+      body {
+        cursor: auto;
+      }
+
+      #cursor,
+      #cursor-ring {
+        display: none;
+      }
+    }
+
+    @media (max-width: 600px) {
+      section {
+        padding: 5rem 5%;
+      }
+
+      #about,
+      #help,
+      #services,
+      #how,
+      #contact {
+        padding: 5rem 5%;
+      }
+
+      #stats {
+        padding: 4rem 5%;
+      }
+
+      #testimonials,
+      #faq {
+        padding: 5rem 5%;
+      }
+
+      footer {
+        padding: 3rem 5% 1.5rem;
+      }
+
+      .hero-title {
+        font-size: 3rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Custom Cursor -->
+  <div id="cursor"></div>
+  <div id="cursor-ring"></div>
+
+  <!-- Page Loader -->
+  <div id="loader">
+    <div class="loader-logo">Healora</div>
+    <div class="loader-tagline">Spark • Shine • Sustain</div>
+    <div class="loader-bar">
+      <div class="loader-bar-fill"></div>
+    </div>
+  </div>
+
+  <!-- Mobile Menu -->
+  <div id="mobile-menu">
+    <a href="#about" onclick="closeMobileMenu()">About</a>
+    <a href="#help" onclick="closeMobileMenu()">How I Help</a>
+    <a href="#services" onclick="closeMobileMenu()">Services</a>
+    <a href="#testimonials" onclick="closeMobileMenu()">Stories</a>
+    <a href="#faq" onclick="closeMobileMenu()">FAQ</a>
+    <a href="#contact" onclick="closeMobileMenu()">Connect</a>
+  </div>
+
+  <!-- NAVBAR -->
+  <nav id="navbar">
+    <a href="#" class="nav-logo">
+      <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M11 2C6.5 2 3 5.5 3 10c0 2.5 1.1 4.7 2.8 6.2L11 20l5.2-3.8C17.9 14.7 19 12.5 19 10c0-4.5-3.5-8-8-8z"
+          stroke="#4A7AAC" stroke-width="1.5" fill="none" />
+        <path d="M7.5 10.5c0-1.9 1.6-3.5 3.5-3.5s3.5 1.6 3.5 3.5-1.6 3.5-3.5 3.5-3.5-1.6-3.5-3.5z" fill="#4A7AAC"
+          opacity="0.3" />
+        <path d="M11 9v3M9.5 10.5h3" stroke="#4A7AAC" stroke-width="1.2" stroke-linecap="round" />
+      </svg>
+      Healora
+    </a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#help">How I Help</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#testimonials">Stories</a></li>
+      <li><a href="#faq">FAQ</a></li>
+      <li><a href="#contact" class="nav-cta">Connect</a></li>
+    </ul>
+    <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <canvas id="hero-canvas"></canvas>
+    <div class="hero-content">
+      <div class="hero-badge">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor">
+          <circle cx="7" cy="7" r="3" />
+        </svg>
+        Emotional Resilience Life Coach
+      </div>
+      <h1 class="hero-title">Heal. <em>Grow.</em><br>Transform.</h1>
+      <p class="hero-subtitle">
+        Helping you become emotionally strong, balanced, and unshakable in life — through deep inner work and
+        compassionate guidance.
+      </p>
+      <div class="hero-tagline">Emotional Healing • Inner Strength • Growth</div>
+      <div class="hero-actions">
+        <a href="https://wa.me/917416010351?text=Can%20we%20set%20up%20a%20discovery%20call%20to%20see%20how%20coaching%20can%20help%20me%3F"
+          class="btn-primary" target="_blank">
+          Begin Your Journey
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M5 12h14M12 5l7 7-7 7" />
+          </svg>
+        </a>
+        <a href="#about" class="btn-outline">Meet Sharmila</a>
+      </div>
+    </div>
+    <div class="hero-scroll-hint">
+      <span class="scroll-hint-text">Scroll</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- WAVE DIVIDER -->
+  <div class="wave-divider">
+    <svg viewBox="0 0 1440 60" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+      <path d="M0,30 C240,60 480,0 720,30 C960,60 1200,0 1440,30 L1440,60 L0,60 Z" fill="#F0F4F8" />
+    </svg>
+  </div>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="about-blob"></div>
+    <div class="about-grid">
+      <div class="about-photo-wrap reveal-left">
+        <div class="about-photo-ring"></div>
+        <div class="about-photo-ring"></div>
+        <div class="about-photo-ring"></div>
+        <div class="about-photo-frame"><img src="sharmila.jpeg" alt="G. A. Sharmila"></div>
+      </div>
+      <div class="about-content reveal-right">
+        <div class="section-label">About</div>
+        <div class="about-badge">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+            <path d="M7 1l1.5 3.5L12 5l-2.5 2.5.5 3.5L7 9.5 4 11l.5-3.5L2 5l3.5-.5z" fill="#5C8A5C" />
+          </svg>
+          Emotional Resilience Life Coach
+        </div>
+        <h2 class="about-name">G. A. Sharmila</h2>
+        <p class="about-role">Founder of Healora 🌿 | Life Coach</p>
+        <p class="about-text">
+          I'm <strong>Sharmila</strong> — a certified Emotional Resilience Life Coach on a mission to help you break
+          free from overthinking, self-doubt, and emotional exhaustion. I believe that <em class="highlight">every soul
+            has the capacity to heal, grow, and shine.</em>
+        </p>
+        <p class="about-text">
+          Deeply inspired by <span class="highlight">Dr. Sasireka Mam</span>, my journey into life coaching began with a
+          profound understanding: healing is not about being fixed — it's about becoming whole. With a foundation in
+          <strong>BA English Literature</strong> and years of dedicated practice, I've helped countless souls reclaim
+          their peace.
+        </p>
+        <p class="about-text">
+          Through Healora, I offer a <em>safe, nurturing space</em> where you can rewire your mindset, rebuild your
+          confidence, and step into the most empowered version of yourself.
+        </p>
+        <div class="about-leaf">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+            <path
+              d="M17 8C8 10 5.9 16.17 3.82 19.93c.75.09 1.49.07 2.18-.07C8 19 12 17 16 12c-1.5 3-3.5 5-6 7 1 .5 2 .8 3 .8 5 0 9-4 9-10 0-2-.5-4-1.5-5.8C20 4.5 18 6 17 8z" />
+          </svg>
+          Founder of Healora — Spark • Shine • Sustain
+        </div>
+      </div>
+    </div>
+    <div class="laurel-divider">Healora</div>
+  </section>
+
+  <!-- WAVE -->
+  <div class="wave-divider" style="background: #F0F4F8;">
+    <svg viewBox="0 0 1440 50" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+      <path d="M0,25 C360,50 720,0 1080,25 C1260,37 1380,20 1440,25 L1440,50 L0,50 Z" fill="#FAFCFF" />
+    </svg>
+  </div>
+
+  <!-- HELP CARDS -->
+  <section id="help">
+    <div class="help-blob"></div>
+    <div class="help-header reveal">
+      <div class="section-label">How I Help</div>
+      <h2 class="section-title">You deserve to feel <em>whole</em> again</h2>
+      <p class="section-subtitle">Whether you're battling anxiety, self-doubt, or emotional fatigue — I'm here to walk
+        this healing path with you.</p>
+    </div>
+    <div class="cards-grid">
+      <div class="glass-card reveal stagger-1">
+        <div class="card-number">01</div>
+        <div class="card-icon">🌀</div>
+        <h3 class="card-title">Break Negative Thought Patterns</h3>
+        <p class="card-text">Identify and dissolve the cycles of overthinking and self-criticism that hold you back from
+          experiencing peace and clarity.</p>
+      </div>
+      <div class="glass-card reveal stagger-2">
+        <div class="card-number">02</div>
+        <div class="card-icon">💙</div>
+        <h3 class="card-title">Build Emotional Strength & Self-Confidence</h3>
+        <p class="card-text">Develop an unshakable inner foundation — emotional resilience that allows you to face
+          life's challenges with grace and courage.</p>
+      </div>
+      <div class="glass-card reveal stagger-3">
+        <div class="card-number">03</div>
+        <div class="card-icon">🧠</div>
+        <h3 class="card-title">Rewire Mindset for Peace & Clarity</h3>
+        <p class="card-text">Transform limiting beliefs at the root level. Cultivate mental clarity, inner calm, and a
+          positive relationship with yourself.</p>
+      </div>
+      <div class="glass-card reveal stagger-4">
+        <div class="card-number">04</div>
+        <div class="card-icon">✨</div>
+        <h3 class="card-title">Grow Into Your Most Empowered Self</h3>
+        <p class="card-text">Step into your full potential — living with purpose, aligned with your values, and
+          radiating the confidence you were born to carry.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- WAVE -->
+  <div class="wave-divider" style="background: #FAFCFF;">
+    <svg viewBox="0 0 1440 50" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+      <path d="M0,25 C480,0 960,50 1440,25 L1440,50 L0,50 Z" fill="#F0F4F8" />
+    </svg>
+  </div>
+
+  <!-- SERVICES -->
+  <section id="services">
+    <div class="services-header reveal">
+      <div class="section-label">Services</div>
+      <h2 class="section-title">Choose your <em>path to healing</em></h2>
+      <p class="section-subtitle">Every session is crafted with intention, compassion, and a deep commitment to your
+        transformation.</p>
+    </div>
+    <div class="services-grid">
+      <div class="service-card reveal stagger-1">
+        <div class="service-top"></div>
+        <div class="service-body">
+          <div class="service-tag">One-on-One</div>
+          <h3 class="service-name">1:1 Coaching Session</h3>
+          <p class="service-desc">A deeply personal, focused session designed around your unique emotional landscape. We
+            dive into what holds you back and chart a clear path forward.</p>
+          <ul class="service-features">
+            <li>60-minute personalized session</li>
+            <li>Emotional assessment & goal setting</li>
+            <li>Custom mindset tools & practices</li>
+            <li>Between-session support via WhatsApp</li>
+            <li>Follow-up resources & workbook</li>
+          </ul>
+          <a href="https://wa.me/917416010351?text=I%20would%20love%20to%20book%20a%20one-on-one%20coaching%20session."
+            class="btn-whatsapp" target="_blank">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+              <path
+                d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" />
+              <path
+                d="M12 0C5.373 0 0 5.373 0 12c0 2.121.555 4.11 1.523 5.843L0 24l6.335-1.491A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.79 9.79 0 01-5.003-1.37l-.358-.213-3.762.986.999-3.648-.235-.373A9.818 9.818 0 012.182 12C2.182 6.573 6.573 2.182 12 2.182S21.818 6.573 21.818 12 17.427 21.818 12 21.818z" />
+            </svg>
+            Book on WhatsApp
+          </a>
+        </div>
+      </div>
+      <div class="service-card reveal stagger-2">
+        <div class="service-top" style="background: linear-gradient(90deg, var(--steel-blue), var(--sky-soft));"></div>
+        <div class="service-body">
+          <div class="service-tag">Transformation Program</div>
+          <h3 class="service-name">Mindset Reset Program</h3>
+          <p class="service-desc">A structured 4-week journey to completely rewire how you think, feel, and respond to
+            life. Deep transformation awaits.</p>
+          <ul class="service-features">
+            <li>4 weeks × 2 sessions per week</li>
+            <li>Personalized mindset audit</li>
+            <li>Daily emotional journaling prompts</li>
+            <li>Guided meditation & visualization</li>
+            <li>Unlimited WhatsApp check-ins</li>
+          </ul>
+          <a href="https://wa.me/917416010351?text=I%E2%80%99m%20interested%20in%20the%20Mindset%20Reset%20Program.%20Can%20I%20get%20more%20details%3F"
+            class="btn-whatsapp" target="_blank">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+              <path
+                d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" />
+              <path
+                d="M12 0C5.373 0 0 5.373 0 12c0 2.121.555 4.11 1.523 5.843L0 24l6.335-1.491A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.79 9.79 0 01-5.003-1.37l-.358-.213-3.762.986.999-3.648-.235-.373A9.818 9.818 0 012.182 12C2.182 6.573 6.573 2.182 12 2.182S21.818 6.573 21.818 12 17.427 21.818 12 21.818z" />
+            </svg>
+            Enquire on WhatsApp
+          </a>
+        </div>
+      </div>
+      <div class="service-card reveal stagger-3">
+        <div class="service-top" style="background: linear-gradient(90deg, var(--leaf-green), #7ab87a);"></div>
+        <div class="service-body">
+          <div class="service-tag">Community Healing</div>
+          <h3 class="service-name">Group Healing Circle</h3>
+          <p class="service-desc">Heal in community. A sacred, supportive group space where souls come together to
+            share, grow, and inspire one another.</p>
+          <ul class="service-features">
+            <li>Weekly 90-minute group sessions</li>
+            <li>Guided group reflections & exercises</li>
+            <li>Private community space</li>
+            <li>Peer accountability & support</li>
+            <li>Monthly live masterclass</li>
+          </ul>
+          <a href="https://wa.me/917416010351?text=I%E2%80%99m%20ready%20to%20begin%20my%20healing%20journey%20with%20you."
+            class="btn-whatsapp" target="_blank">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+              <path
+                d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" />
+              <path
+                d="M12 0C5.373 0 0 5.373 0 12c0 2.121.555 4.11 1.523 5.843L0 24l6.335-1.491A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.79 9.79 0 01-5.003-1.37l-.358-.213-3.762.986.999-3.648-.235-.373A9.818 9.818 0 012.182 12C2.182 6.573 6.573 2.182 12 2.182S21.818 6.573 21.818 12 17.427 21.818 12 21.818z" />
+            </svg>
+            Join on WhatsApp
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WAVE -->
+  <div class="wave-divider" style="background: #F0F4F8;">
+    <svg viewBox="0 0 1440 50" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+      <path d="M0,0 C360,50 1080,0 1440,50 L1440,50 L0,50 Z" fill="#FAFCFF" />
+    </svg>
+  </div>
+
+  <!-- HOW IT WORKS -->
+  <section id="how">
+    <div class="how-header reveal">
+      <div class="section-label">The Process</div>
+      <h2 class="section-title">Your journey to <em>transformation</em></h2>
+      <p class="section-subtitle">A simple, compassionate three-step process designed to meet you exactly where you are.
+      </p>
+    </div>
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-content">
+          <div class="timeline-step">Step 01</div>
+          <h3 class="timeline-title">Discovery Call</h3>
+          <p class="timeline-desc">We begin with a warm, judgment-free conversation. I listen deeply to your story, your
+            struggles, and your hopes — so I can truly understand where you are and where you want to go.</p>
+        </div>
+        <div class="timeline-dot">1</div>
+        <div class="timeline-empty"></div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-empty"></div>
+        <div class="timeline-dot">2</div>
+        <div class="timeline-content">
+          <div class="timeline-step">Step 02</div>
+          <h3 class="timeline-title">Personalized Plan</h3>
+          <p class="timeline-desc">Together, we craft a unique roadmap for your healing and growth. No generic advice —
+            every strategy, tool, and practice is tailored specifically to your emotional needs and life goals.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-content">
+          <div class="timeline-step">Step 03</div>
+          <h3 class="timeline-title">Ongoing Support</h3>
+          <p class="timeline-desc">Transformation is a journey, not a destination. I walk alongside you with consistent
+            sessions, check-ins, and resources — celebrating your wins and supporting you through every challenge.</p>
+        </div>
+        <div class="timeline-dot">3</div>
+        <div class="timeline-empty"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <section id="stats">
+    <div class="stats-bg-text">Healora</div>
+    <div class="stats-grid">
+      <div class="stat-item reveal stagger-1">
+        <span class="stat-number" data-target="200">0<span>+</span></span>
+        <span class="stat-label">Lives Impacted</span>
+      </div>
+      <div class="stat-item reveal stagger-2">
+        <span class="stat-number" data-target="500">0<span>+</span></span>
+        <span class="stat-label">Sessions Completed</span>
+      </div>
+      <div class="stat-item reveal stagger-3">
+        <span class="stat-number" data-target="10000">0<span>+</span></span>
+        <span class="stat-label">YouTube Views</span>
+      </div>
+      <div class="stat-item reveal stagger-4">
+        <span class="stat-number" data-target="5">0<span>+</span></span>
+        <span class="stat-label">Years of Passion</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section id="testimonials">
+    <div class="testi-header reveal">
+      <div class="section-label">Stories</div>
+      <h2 class="section-title">Voices of <em>transformation</em></h2>
+      <p class="section-subtitle">Real words from real souls who chose to begin their healing journey with Healora.</p>
+    </div>
+    <div class="testi-carousel">
+      <div class="testi-track" id="testi-track">
+        <div class="testi-card">
+          <div class="testi-quote-icon">"</div>
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-text">"Sharmila helped me break a 3-year pattern of anxiety and overthinking. I finally feel
+            at home in my own mind. Her sessions are so gentle yet incredibly powerful — she sees you in a way no one
+            else does."</p>
+          <div class="testi-author">
+            <div class="testi-avatar">PM</div>
+            <div>
+              <div class="testi-name">Priya Mehta</div>
+              <div class="testi-loc">Chennai, Tamil Nadu</div>
+            </div>
+          </div>
+        </div>
+        <div class="testi-card">
+          <div class="testi-quote-icon">"</div>
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-text">"I came to Sharmila completely broken after a difficult relationship. She didn't just
+            coach me — she helped me rediscover who I am. The Mindset Reset Program was life-changing. I'm a different
+            person today."</p>
+          <div class="testi-author">
+            <div class="testi-avatar">SK</div>
+            <div>
+              <div class="testi-name">Sunita Krishnan</div>
+              <div class="testi-loc">Bangalore, Karnataka</div>
+            </div>
+          </div>
+        </div>
+        <div class="testi-card">
+          <div class="testi-quote-icon">"</div>
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-text">"Joining the Group Healing Circle was the best decision I made this year. The community,
+            the guidance, the compassion — it's unlike anything I've experienced. Sharmila holds such a safe space for
+            everyone."</p>
+          <div class="testi-author">
+            <div class="testi-avatar">RA</div>
+            <div>
+              <div class="testi-name">Raji Anand</div>
+              <div class="testi-loc">Madurai, Tamil Nadu</div>
+            </div>
+          </div>
+        </div>
+        <div class="testi-card">
+          <div class="testi-quote-icon">"</div>
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-text">"I was drowning in self-doubt and didn't believe I could feel confident again.
+            Sharmila's 1:1 sessions gave me tools I use every single day. My relationship with myself is completely
+            transformed."</p>
+          <div class="testi-author">
+            <div class="testi-avatar">DN</div>
+            <div>
+              <div class="testi-name">Deepa Nair</div>
+              <div class="testi-loc">Coimbatore, Tamil Nadu</div>
+            </div>
+          </div>
+        </div>
+        <div class="testi-card">
+          <div class="testi-quote-icon">"</div>
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-text">"Sharmila's YouTube videos first opened my eyes to emotional resilience. When I finally
+            had a session with her, it exceeded every expectation. She has a gift for making you feel truly understood
+            and capable."</p>
+          <div class="testi-author">
+            <div class="testi-avatar">LV</div>
+            <div>
+              <div class="testi-name">Lalitha Venkat</div>
+              <div class="testi-loc">Hyderabad, Telangana</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="carousel-nav">
+      <button class="carousel-btn" id="prev-btn" aria-label="Previous">&#8592;</button>
+      <div class="carousel-dots" id="carousel-dots"></div>
+      <button class="carousel-btn" id="next-btn" aria-label="Next">&#8594;</button>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq">
+    <div class="faq-header reveal">
+      <div class="section-label">FAQ</div>
+      <h2 class="section-title">Questions <em>answered</em></h2>
+      <p class="section-subtitle">Everything you need to know before beginning your healing journey with Healora.</p>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          What is emotional resilience coaching?
+          <div class="faq-icon">+</div>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">Emotional resilience coaching is a transformative process that helps you develop
+            the inner strength to navigate life's challenges without being overwhelmed. It involves identifying
+            emotional patterns, rewiring limiting beliefs, and building practical tools for emotional regulation — so
+            you can face anything life brings with greater clarity, peace, and confidence.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          How is this different from therapy?
+          <div class="faq-icon">+</div>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">While therapy often focuses on healing the past and treating mental health
+            conditions, life coaching is forward-focused. We work on where you are now and where you want to be —
+            building strengths, strategies, and momentum. Coaching is action-oriented, empowering, and rooted in your
+            growth potential. It's the difference between healing wounds and building wings.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          Do sessions happen online or in person?
+          <div class="faq-icon">+</div>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">All sessions are currently conducted online via video call, making it accessible
+            to anyone, anywhere. This means you can begin your healing journey from the comfort of your own home — in a
+            space where you feel most safe and open. In-person sessions may be available on request for those in the
+            Madurai area.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          How many sessions will I need?
+          <div class="faq-icon">+</div>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">Every healing journey is unique. Some clients experience profound shifts in just
+            a few sessions, while others prefer ongoing support for deeper transformation. After your discovery call,
+            I'll give you an honest recommendation based on your goals and needs. There is no pressure — you are always
+            in control of your pace and commitment.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          What issues do you work with?
+          <div class="faq-icon">+</div>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">I specialize in helping people overcome overthinking, chronic stress,
+            self-doubt, lack of confidence, emotional exhaustion, people-pleasing patterns, and fear of change. If you
+            feel stuck, emotionally drained, or disconnected from who you truly are — this work is for you.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          How do I get started?
+          <div class="faq-icon">+</div>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">The easiest way is to reach out via WhatsApp — just tap the button below or
+            anywhere on this page. We'll have a brief, relaxed conversation to understand what you're looking for, and
+            then we can schedule your first discovery call. There's no obligation, no judgment — just an open, caring
+            conversation.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WAVE -->
+  <div class="wave-divider" style="background: #FAFCFF;">
+    <svg viewBox="0 0 1440 50" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+      <path d="M0,50 C480,0 960,50 1440,0 L1440,50 L0,50 Z" fill="#F0F4F8" />
+    </svg>
+  </div>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="contact-grid">
+      <div class="contact-info reveal-left">
+        <div class="section-label">Connect</div>
+        <h2 class="section-title">Ready to <em>begin?</em></h2>
+        <p class="contact-tagline">"The most courageous thing you can do is take the first step towards healing. I am
+          here, ready to walk this path with you."</p>
+        <a href="https://wa.me/917416010351?text=I%E2%80%99m%20ready%20to%20begin%20my%20healing%20journey%20with%20you."
+          class="contact-item" target="_blank">
+          <div class="contact-icon">📱</div>
+          <span>+91 7416 010 351 (WhatsApp)</span>
+        </a>
+        <a href="mailto:sharmilifecoach04@gmail.com" class="contact-item">
+          <div class="contact-icon">📧</div>
+          <span>sharmilifecoach04@gmail.com</span>
+        </a>
+        <a href="https://www.instagram.com/sharmila.lifecoach" class="contact-item" target="_blank">
+          <div class="contact-icon">📸</div>
+          <span>@sharmila.lifecoach</span>
+        </a>
+        <a href="https://www.youtube.com/@SparkandShinewithSharmila" class="contact-item" target="_blank">
+          <div class="contact-icon">▶️</div>
+          <span>Spark and Shine with Sharmila</span>
+        </a>
+        <div class="social-links">
+          <a href="https://www.instagram.com/sharmila.lifecoach" class="social-link" target="_blank" title="Instagram">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+              <path
+                d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+            </svg>
+          </a>
+          <a href="https://www.youtube.com/@SparkandShinewithSharmila" class="social-link" target="_blank"
+            title="YouTube">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+              <path
+                d="M23.495 6.205a3.007 3.007 0 0 0-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 0 0 .527 6.205a31.247 31.247 0 0 0-.522 5.805 31.247 31.247 0 0 0 .522 5.783 3.007 3.007 0 0 0 2.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 0 0 2.088-2.088 31.247 31.247 0 0 0 .5-5.783 31.247 31.247 0 0 0-.5-5.805zM9.609 15.601V8.408l6.264 3.602z" />
+            </svg>
+          </a>
+          <a href="https://www.facebook.com/SharmilaGhulamAli" class="social-link" target="_blank" title="Facebook">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+              <path
+                d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+            </svg>
+          </a>
+        </div>
+      </div>
+      <div class="contact-form reveal-right">
+        <div id="contact-form-wrap">
+          <div class="form-group">
+            <label class="form-label">Your Name</label>
+            <input type="text" class="form-input" id="f-name" placeholder="What shall I call you?">
+            <div class="form-error">Please enter your name</div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Email Address</label>
+            <input type="email" class="form-input" id="f-email" placeholder="your@email.com">
+            <div class="form-error">Please enter a valid email</div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Phone / WhatsApp</label>
+            <input type="tel" class="form-input" id="f-phone" placeholder="+91 XXXXX XXXXX">
+            <div class="form-error">Please enter your phone number</div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">What brings you here?</label>
+            <select class="form-select" id="f-topic">
+              <option value="">Choose a topic...</option>
+              <option>Overthinking & Anxiety</option>
+              <option>Self-Doubt & Low Confidence</option>
+              <option>Stress & Emotional Exhaustion</option>
+              <option>Relationship & People-Pleasing</option>
+              <option>Mindset & Personal Growth</option>
+              <option>General Inquiry</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Your Message</label>
+            <textarea class="form-textarea" id="f-message"
+              placeholder="Tell me a little about where you are right now and what you're hoping for..."></textarea>
+            <div class="form-error">Please share a brief message</div>
+          </div>
+          <button class="btn-primary" style="width:100%; justify-content:center;" onclick="submitForm()">
+            Send My Message
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M5 12h14M12 5l7 7-7 7" />
+            </svg>
+          </button>
+        </div>
+        <div class="form-success" id="form-success">
+          <div style="font-size:2.5rem; margin-bottom:1rem;">🌿</div>
+          <h3>Your message has landed safely.</h3>
+          <p>Thank you for reaching out. Sharmila will personally respond within 24 hours. Your healing journey begins
+            here.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand-name">Healora</div>
+        <div class="footer-brand-tag">Spark • Shine • Sustain</div>
+        <p class="footer-brand-desc">A safe, nurturing space for emotional healing, inner strength, and profound
+          personal growth. Founded with love by G. A. Sharmila.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Navigate</h4>
+        <ul>
+          <li><a href="#about">About Sharmila</a></li>
+          <li><a href="#help">How I Help</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#how">The Process</a></li>
+          <li><a href="#testimonials">Success Stories</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Connect</h4>
+        <ul>
+          <li><a
+              href="https://wa.me/917416010351?text=I%E2%80%99m%20ready%20to%20begin%20my%20healing%20journey%20with%20you."
+              target="_blank">WhatsApp</a></li>
+          <li><a href="mailto:sharmilifecoach04@gmail.com">Email</a></li>
+          <li><a href="https://www.instagram.com/sharmila.lifecoach" target="_blank">Instagram</a></li>
+          <li><a href="https://www.youtube.com/@SparkandShinewithSharmila" target="_blank">YouTube</a></li>
+          <li><a href="https://www.facebook.com/SharmilaGhulamAli" target="_blank">Facebook</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">© 2026 Healora. All rights reserved.</span>
+      <span class="footer-tagline">Spark • Shine • Sustain</span>
+    </div>
+  </footer>
+
+  <!-- FLOATING WHATSAPP -->
+  <div id="whatsapp-float">
+    <div class="wa-tooltip">Chat with Sharmila</div>
+    <a href="https://wa.me/917416010351?text=Can%20we%20set%20up%20a%20discovery%20call%20to%20see%20how%20coaching%20can%20help%20me%3F"
+      class="wa-btn" target="_blank" aria-label="WhatsApp">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path
+          d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" />
+        <path
+          d="M12 0C5.373 0 0 5.373 0 12c0 2.121.555 4.11 1.523 5.843L0 24l6.335-1.491A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.79 9.79 0 01-5.003-1.37l-.358-.213-3.762.986.999-3.648-.235-.373A9.818 9.818 0 012.182 12C2.182 6.573 6.573 2.182 12 2.182S21.818 6.573 21.818 12 17.427 21.818 12 21.818z" />
+      </svg>
+    </a>
+  </div>
+
+  <!-- SCROLL TO TOP -->
+  <button id="scroll-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Scroll to top">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="M12 19V5M5 12l7-7 7 7" />
+    </svg>
+  </button>
+
+  <script>
+    // PAGE LOADER
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        document.getElementById('loader').classList.add('hidden');
+      }, 2200);
+    });
+
+    // CURSOR
+    const cursor = document.getElementById('cursor');
+    const ring = document.getElementById('cursor-ring');
+    let mx = 0, my = 0, rx = 0, ry = 0;
+    document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+    function animateCursor() {
+      rx += (mx - rx) * 0.12;
+      ry += (my - ry) * 0.12;
+      if (cursor) cursor.style.cssText = `left:${mx}px;top:${my}px;`;
+      if (ring) ring.style.cssText = `left:${rx}px;top:${ry}px;`;
+      requestAnimationFrame(animateCursor);
+    }
+    animateCursor();
+    document.querySelectorAll('a,button,.glass-card,.service-card').forEach(el => {
+      el.addEventListener('mouseenter', () => { if (cursor) { cursor.style.width = '30px'; cursor.style.height = '30px'; cursor.style.opacity = '0.5'; } });
+      el.addEventListener('mouseleave', () => { if (cursor) { cursor.style.width = '16px'; cursor.style.height = '16px'; cursor.style.opacity = '1'; } });
+    });
+
+    // NAVBAR
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 50);
+      document.getElementById('scroll-top').classList.toggle('visible', window.scrollY > 300);
+    });
+
+    // MOBILE MENU
+    let menuOpen = false;
+    function toggleMenu() {
+      menuOpen = !menuOpen;
+      document.getElementById('mobile-menu').classList.toggle('open', menuOpen);
+      const spans = document.querySelectorAll('.hamburger span');
+      if (menuOpen) {
+        spans[0].style.cssText = 'transform:rotate(45deg) translate(4px,5px)';
+        spans[1].style.cssText = 'opacity:0';
+        spans[2].style.cssText = 'transform:rotate(-45deg) translate(4px,-5px)';
+      } else {
+        spans.forEach(s => s.style.cssText = '');
+      }
+    }
+    function closeMobileMenu() { menuOpen = false; document.getElementById('mobile-menu').classList.remove('open'); document.querySelectorAll('.hamburger span').forEach(s => s.style.cssText = ''); }
+
+    // HERO CANVAS
+    const canvas = document.getElementById('hero-canvas');
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+    let W, H;
+
+    function resize() {
+      W = canvas.width = canvas.offsetWidth;
+      H = canvas.height = canvas.offsetHeight;
+    }
+    resize();
+    window.addEventListener('resize', resize);
+
+    class Particle {
+      constructor() { this.reset(); }
+      reset() {
+        this.x = Math.random() * W;
+        this.y = Math.random() * H;
+        this.baseX = this.x;
+        this.baseY = this.y;
+        this.size = Math.random() * 80 + 20;
+        this.alpha = Math.random() * 0.12 + 0.03;
+        this.vx = (Math.random() - 0.5) * 0.4;
+        this.vy = (Math.random() - 0.5) * 0.4;
+        this.hue = Math.random() < 0.6 ? '210' : (Math.random() < 0.5 ? '220' : '200');
+        this.sat = Math.floor(Math.random() * 30 + 40);
+        this.phase = Math.random() * Math.PI * 2;
+        this.speed = Math.random() * 0.005 + 0.003;
+      }
+      update() {
+        this.phase += this.speed;
+        this.x = this.baseX + Math.sin(this.phase) * 30;
+        this.y = this.baseY + Math.cos(this.phase * 0.7) * 20;
+        this.baseX += this.vx * 0.3;
+        this.baseY += this.vy * 0.3;
+        if (this.baseX < -100 || this.baseX > W + 100 || this.baseY < -100 || this.baseY > H + 100) this.reset();
+      }
+      draw() {
+        ctx.save();
+        const grad = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, this.size);
+        grad.addColorStop(0, `hsla(${this.hue},${this.sat}%,65%,${this.alpha})`);
+        grad.addColorStop(0.5, `hsla(${this.hue},${this.sat}%,72%,${this.alpha * 0.6})`);
+        grad.addColorStop(1, 'transparent');
+        ctx.fillStyle = grad;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
+      }
+    }
+
+    for (let i = 0; i < 40; i++) particles.push(new Particle());
+
+    function animateCanvas() {
+      ctx.clearRect(0, 0, W, H);
+      const bgGrad = ctx.createRadialGradient(W * 0.3, H * 0.3, 0, W * 0.5, H * 0.5, Math.max(W, H) * 0.8);
+      bgGrad.addColorStop(0, 'rgba(240,244,248,1)');
+      bgGrad.addColorStop(0.5, 'rgba(245,249,253,0.95)');
+      bgGrad.addColorStop(1, 'rgba(250,252,255,1)');
+      ctx.fillStyle = bgGrad;
+      ctx.fillRect(0, 0, W, H);
+      particles.forEach(p => { p.update(); p.draw(); });
+      requestAnimationFrame(animateCanvas);
+    }
+    animateCanvas();
+
+    // INTERSECTION OBSERVER
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.15 });
+    document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .timeline-item').forEach(el => observer.observe(el));
+
+    // STATS COUNTER
+    const statsObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const statNums = entry.target.querySelectorAll('[data-target]');
+          statNums.forEach(el => {
+            const target = parseInt(el.dataset.target);
+            const suffix = el.querySelector('span').outerHTML;
+            let current = 0;
+            const step = target / 60;
+            const timer = setInterval(() => {
+              current += step;
+              if (current >= target) { current = target; clearInterval(timer); }
+              el.innerHTML = (target >= 1000 ? Math.floor(current).toLocaleString() : Math.floor(current)) + suffix;
+            }, 25);
+          });
+          statsObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.3 });
+    const statsSection = document.getElementById('stats');
+    if (statsSection) statsObserver.observe(statsSection);
+
+    // FAQ
+    function toggleFaq(btn) {
+      const item = btn.parentElement;
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+      if (!isOpen) item.classList.add('open');
+    }
+
+    // CAROUSEL
+    let currentSlide = 0;
+    const track = document.getElementById('testi-track');
+    const cards = track ? track.children : [];
+    const cardCount = cards.length;
+    const dotsContainer = document.getElementById('carousel-dots');
+
+    function getCardsVisible() { return window.innerWidth < 600 ? 1 : window.innerWidth < 900 ? 2 : 3; }
+    function getMaxSlide() { return Math.max(0, cardCount - getCardsVisible()); }
+
+    function buildDots() {
+      if (!dotsContainer) return;
+      dotsContainer.innerHTML = '';
+      const maxSlide = getMaxSlide();
+      for (let i = 0; i <= maxSlide; i++) {
+        const dot = document.createElement('button');
+        dot.className = 'carousel-dot' + (i === currentSlide ? ' active' : '');
+        dot.onclick = () => goToSlide(i);
+        dotsContainer.appendChild(dot);
+      }
+    }
+
+    function goToSlide(n) {
+      currentSlide = Math.max(0, Math.min(n, getMaxSlide()));
+      const cardWidth = cards[0] ? cards[0].offsetWidth + 24 : 384;
+      track.style.transform = `translateX(-${currentSlide * cardWidth}px)`;
+      document.querySelectorAll('.carousel-dot').forEach((d, i) => d.classList.toggle('active', i === currentSlide));
+    }
+
+    document.getElementById('prev-btn')?.addEventListener('click', () => goToSlide(currentSlide - 1));
+    document.getElementById('next-btn')?.addEventListener('click', () => goToSlide(currentSlide + 1));
+    buildDots();
+
+    // Auto carousel
+    setInterval(() => {
+      const next = currentSlide >= getMaxSlide() ? 0 : currentSlide + 1;
+      goToSlide(next);
+    }, 4500);
+    window.addEventListener('resize', () => { buildDots(); goToSlide(Math.min(currentSlide, getMaxSlide())); });
+
+    // FORM
+    function submitForm() {
+      let valid = true;
+      const name = document.getElementById('f-name');
+      const email = document.getElementById('f-email');
+      const msg = document.getElementById('f-message');
+
+      [name, email, msg].forEach(f => { f.parentElement.classList.remove('error'); });
+
+      if (!name.value.trim()) { name.parentElement.classList.add('error'); valid = false; }
+      if (!email.value.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) { email.parentElement.classList.add('error'); valid = false; }
+      if (!msg.value.trim()) { msg.parentElement.classList.add('error'); valid = false; }
+
+      if (valid) {
+        document.getElementById('contact-form-wrap').style.display = 'none';
+        document.getElementById('form-success').classList.add('show');
+      }
+    }
+
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        const href = this.getAttribute('href');
+        if (href === '#') return;
+        e.preventDefault();
+        const target = document.querySelector(href);
+        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    });
+  </script>
+</body>
+
+</html>
