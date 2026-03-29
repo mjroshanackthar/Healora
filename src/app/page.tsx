@@ -164,45 +164,49 @@ export default function HealoraPage() {
       </nav>
 
       {/* Hero Section */}
-      <section className="relative h-[100dvh] min-h-[700px] flex items-center justify-center pt-24 px-[5%] hero-gradient overflow-hidden">
-        <div className="absolute inset-0 opacity-40">
-          <Sparkles className="absolute top-[15%] left-[10%] w-12 h-12 text-[var(--steel-blue)] animate-pulse opacity-20" />
-          <div className="absolute top-[50%] right-[-5%] w-[500px] h-[500px] bg-[var(--sky-soft)] opacity-10 blur-[120px] rounded-full" />
+      <section className="relative min-h-[85vh] flex flex-col items-center justify-center pt-32 pb-20 px-[5%] hero-gradient overflow-hidden">
+        <div className="absolute inset-0 pointer-events-none">
+          <Sparkles className="absolute top-[25%] left-[8%] md:left-[15%] w-8 md:w-12 h-8 md:h-12 text-[var(--steel-blue)] animate-pulse opacity-10" />
+          <div className="absolute top-[40%] right-[-10%] w-[300px] md:w-[600px] h-[300px] md:h-[600px] bg-[var(--sky-soft)] opacity-[0.05] blur-[100px] rounded-full" />
         </div>
 
         <motion.div 
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.5 }}
-          className="relative z-10 text-center max-w-4xl"
+          className="relative z-10 text-center max-w-5xl px-4"
         >
-          <div className="inline-flex items-center gap-2 px-4 py-1 rounded-full border border-[var(--steel-blue)]/20 bg-white/50 text-[var(--steel-blue)] text-[0.7rem] font-bold tracking-[0.2em] uppercase mb-8">
+          <div className="inline-flex items-center gap-2 px-5 py-1.5 rounded-full border border-[var(--steel-blue)]/20 bg-white/40 text-[var(--steel-blue)] text-[0.65rem] md:text-[0.7rem] font-bold tracking-[0.25em] uppercase mb-10">
             <motion.div 
-              animate={{ scale: [1, 1.5, 1] }} 
-              transition={{ repeat: Infinity, duration: 2 }}
+              animate={{ scale: [1, 1.6, 1], opacity: [0.3, 1, 0.3] }} 
+              transition={{ repeat: Infinity, duration: 2.5 }}
               className="w-1.5 h-1.5 rounded-full bg-[var(--steel-blue)]" 
             />
-            Emotional Resilience Life Coach
+            Certified Emotional Resilience Life Coach
           </div>
           
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-serif text-[var(--navy-deep)] leading-[1.1] mb-8">
-            Heal. <em className="text-[var(--steel-blue)] italic font-light">Grow.</em><br />Transform.
+          <h1 className="text-6xl md:text-8xl lg:text-9xl font-serif text-[var(--navy-deep)] leading-[0.95] mb-10 tracking-tight">
+            Heal. <em className="text-[var(--steel-blue)] italic font-light drop-shadow-sm">Grow.</em><br />Transform.
           </h1>
           
-          <p className="text-lg md:text-xl text-[var(--navy-primary)] font-light leading-relaxed max-w-2xl mx-auto mb-10 opacity-80">
+          <p className="text-xl md:text-2xl text-[var(--navy-primary)] font-light leading-relaxed max-w-3xl mx-auto mb-12 opacity-90 italic">
             Helping you become emotionally strong, balanced, and unshakable in life — through deep inner work and compassionate guidance.
           </p>
 
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+          <div className="flex flex-col md:flex-row items-center justify-center gap-6">
             <a 
               href="https://wa.me/917416010351?text=Can%20we%20set%20up%20a%20discovery%20call%20to%20see%20how%20coaching%20can%20help%20me%3F"
               target="_blank"
-              className="btn-primary"
+              className="btn-primary px-10 py-5 text-sm"
             >
-              Begin Your Journey <ArrowRight className="w-4 h-4 ml-1" />
+              Begin Your Journey
+              <ArrowRight className="w-4 h-4" />
             </a>
-            <a href="#about" className="btn-outline">
-              Meet Sharmila
+            <a 
+              href="#about" 
+              className="text-[0.7rem] font-bold tracking-[0.2em] text-[var(--steel-blue)] uppercase border-b border-[var(--steel-blue)]/30 pb-1 hover:border-[var(--steel-blue)] transition-all"
+            >
+              Learn about Sharmila
             </a>
           </div>
         </motion.div>
