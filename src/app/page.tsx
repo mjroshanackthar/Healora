@@ -22,7 +22,7 @@ import {
   Linkedin
 } from 'lucide-react';
 
-const BASE_PATH = '/Healora';
+const BASE_PATH = '';
 
 export default function HealoraPage() {
   const [mounted, setMounted] = useState(false);
