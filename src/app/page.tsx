@@ -59,7 +59,7 @@ export default function HealoraPage() {
     try {
       // Replace 'XXXXX' with your real Formspree ID once you have it
       // For now, it will attempt a generic submission
-      const response = await fetch('https://formspree.io/f/XXXXX', {
+      const response = await fetch('https://formspree.io/f/xeepanpr', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
