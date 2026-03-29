@@ -164,10 +164,10 @@ export default function HealoraPage() {
       </nav>
 
       {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center pt-20 px-[5%] hero-gradient overflow-hidden">
+      <section className="relative h-[100dvh] min-h-[700px] flex items-center justify-center pt-24 px-[5%] hero-gradient overflow-hidden">
         <div className="absolute inset-0 opacity-40">
-          <Sparkles className="absolute top-[20%] left-[15%] w-12 h-12 text-[var(--steel-blue)] animate-pulse" />
-          <div className="absolute top-[60%] right-[10%] w-[400px] h-[400px] bg-[var(--sky-soft)] opacity-20 blur-[100px] rounded-full" />
+          <Sparkles className="absolute top-[15%] left-[10%] w-12 h-12 text-[var(--steel-blue)] animate-pulse opacity-20" />
+          <div className="absolute top-[50%] right-[-5%] w-[500px] h-[500px] bg-[var(--sky-soft)] opacity-10 blur-[120px] rounded-full" />
         </div>
 
         <motion.div 
