@@ -22,6 +22,8 @@ import {
   Linkedin
 } from 'lucide-react';
 
+const BASE_PATH = '/Healora';
+
 export default function HealoraPage() {
   const [mounted, setMounted] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -184,7 +186,7 @@ export default function HealoraPage() {
           >
             <div className="relative z-10 w-full max-w-[400px] aspect-square rounded-full overflow-hidden border-4 border-white shadow-2xl">
               <Image 
-                src="/sharmila.jpeg" 
+                src={`${BASE_PATH}/sharmila.jpeg`} 
                 alt="G. A. Sharmila" 
                 fill
                 className="object-cover"
