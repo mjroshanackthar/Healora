@@ -157,7 +157,7 @@ export default function HealoraPage() {
     {
       id: "Parent Session",
       title: "Emotionally Aware Parenting Workshop",
-      tag: "Parent Session 👨‍👩‍👧",
+      tag: "Parent Session",
       desc: "A guided session to help parents raise emotionally strong, confident, and balanced children.",
       features: [
         "Interactive session (60–90 mins)",
@@ -173,7 +173,7 @@ export default function HealoraPage() {
     {
       id: "Student Resilience",
       title: "Emotional Resilience Workshop",
-      tag: "School / College Session 🎓",
+      tag: "School / College Session",
       desc: "A transformative session designed to help students build inner strength, emotional balance, and a growth mindset.",
       features: [
         "Interactive workshop (60–90 mins)",
@@ -445,18 +445,18 @@ export default function HealoraPage() {
       {/* Stories / Stats */}
       <section id="stories" className="py-24 px-[5%] bg-white">
         <div className="max-w-7xl mx-auto">
-          <div className="grid lg:grid-cols-4 gap-12 bg-[var(--navy-deep)] rounded-[40px] p-12 lg:p-20 text-white relative overflow-hidden">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12 bg-[var(--navy-deep)] rounded-[40px] p-10 md:p-12 lg:p-20 text-white relative overflow-hidden">
             <div className="absolute top-0 right-0 p-8 text-[var(--sky-soft)] text-xl font-serif italic font-light opacity-10 leading-none select-none">HEALORA</div>
 
             {[
-              { label: "Lives Impacted", val: "200+" },
-              { label: "Sessions Completed", val: "500+" },
-              { label: "YouTube Views", val: "10,000+" },
-              { label: "Years of Passion", val: "5+" }
-            ].map((stat) => (
-              <div key={stat.label} className="text-center">
-                <div className="text-5xl font-serif mb-2">{stat.val}</div>
-                <div className="text-[0.65rem] font-bold tracking-[0.2em] uppercase text-[var(--sky-soft)]">{stat.label}</div>
+              { text: "Healing with Compassion" },
+              { text: "Empowering Inner Strength" },
+              { text: "Mindset Transformation" },
+              { text: "Guided Growth Journey" }
+            ].map((item) => (
+              <div key={item.text} className="text-center group">
+                <div className="text-2xl md:text-4xl mb-3 md:mb-6 group-hover:scale-110 transition-transform duration-500">{item.icon}</div>
+                <div className="text-sm md:text-lg font-serif text-white leading-snug tracking-wide max-w-[150px] md:max-w-[200px] mx-auto italic font-light opacity-90">{item.text}</div>
               </div>
             ))}
           </div>
