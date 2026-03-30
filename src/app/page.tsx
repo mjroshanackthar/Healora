@@ -153,6 +153,38 @@ export default function HealoraPage() {
       features: ["Weekly 90-min sessions", "Group reflections", "Private community", "Peer accountability", "Live masterclass"],
       color: "var(--leaf-green)",
       msg: "I’m ready to begin my healing journey with you."
+    },
+    {
+      id: "Parent Session",
+      title: "Emotionally Aware Parenting Workshop",
+      tag: "Parent Session 👨‍👩‍👧",
+      desc: "A guided session to help parents raise emotionally strong, confident, and balanced children.",
+      features: [
+        "Interactive session (60–90 mins)",
+        "Child mindset & emotional needs",
+        "Responding vs reacting",
+        "Strengthening parent-child bond",
+        "Healthy boundaries & communication",
+        "Real-life scenarios & guidance"
+      ],
+      color: "var(--earth-warm)",
+      msg: "I’m interested in the Emotionally Aware Parenting Workshop for my family."
+    },
+    {
+      id: "Student Resilience",
+      title: "Emotional Resilience Workshop",
+      tag: "School / College Session 🎓",
+      desc: "A transformative session designed to help students build inner strength, emotional balance, and a growth mindset.",
+      features: [
+        "Interactive workshop (60–90 mins)",
+        "Emotional awareness & regulation",
+        "Overthinking & stress control",
+        "Confidence & clarity building",
+        "Practical mindset tools",
+        "Guided exercises & sharing"
+      ],
+      color: "var(--wisdom-purple)",
+      msg: "I’d like to inquire about an Emotional Resilience Workshop for my institution."
     }
   ];
 
@@ -368,7 +400,7 @@ export default function HealoraPage() {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-8 max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
           {services.map((service, index) => (
             <motion.div
               key={service.id}
