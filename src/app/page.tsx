@@ -342,6 +342,7 @@ export default function HealoraPage() {
                 src={`${BASE_PATH}/sharmila.jpeg`}
                 alt="Sharmila G A"
                 fill
+                sizes="(max-width: 768px) 90vw, 400px"
                 className="object-cover"
               />
             </div>
@@ -443,9 +444,9 @@ export default function HealoraPage() {
       </section>
 
       {/* Stories / Quote Section */}
-      <section id="stories" className="py-12 md:py-16 px-[5%] bg-white">
-        <div className="max-w-3xl mx-auto">
-          <div className="bg-[var(--navy-deep)] rounded-[32px] p-10 md:p-12 text-white relative overflow-hidden text-center">
+      <section id="stories" className="py-8 md:py-12 px-[5%] bg-white">
+        <div className="max-w-2xl mx-auto">
+          <div className="bg-[var(--navy-deep)] rounded-[32px] p-8 md:p-10 text-white relative overflow-hidden text-center">
             <div className="absolute top-0 right-0 p-8 text-[var(--sky-soft)] text-xl font-serif italic font-light opacity-5 leading-none select-none">HEALORA</div>
             
             <blockquote className="relative z-10">
