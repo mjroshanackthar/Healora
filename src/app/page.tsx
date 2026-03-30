@@ -132,7 +132,7 @@ export default function HealoraPage() {
       title: "1:1 Coaching Session",
       tag: "One-on-One",
       desc: "A deeply personal, focused session designed around your unique emotional landscape.",
-      features: ["60-minute personalized session", "Emotional assessment & goal setting", "Custom mindset tools", "WhatsApp support", "Workbook included"],
+      features: ["60-minute personalized session", "Emotional assessment & goal setting", "Custom mindset tools", "WhatsApp support", "Self-Discovery Practices"],
       color: "var(--navy-primary)",
       msg: "I would love to book a one-on-one coaching session."
     },
