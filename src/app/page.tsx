@@ -527,7 +527,6 @@ export default function HealoraPage() {
         </div>
       </section>
 
-      {/* Contact Section */}
       <section id="contact" className="py-24 px-[5%] bg-[var(--mist-white)] relative">
         <div className="max-w-6xl mx-auto grid lg:grid-cols-2 gap-20">
           <div>
