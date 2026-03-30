@@ -15,7 +15,7 @@ const cormorant = Cormorant_Garamond({
 });
 
 export const metadata: Metadata = {
-  title: "Healora — Spark • Shine • Sustain | G. A. Sharmila",
+  title: "Healora — Spark • Shine • Sustain |Sharmila G A",
   description: "Certified Emotional Resilience Life Coach on a mission to help you break free from overthinking, self-doubt, and emotional exhaustion.",
 };
 
