@@ -445,7 +445,7 @@ export default function HealoraPage() {
 
       {/* Stories / Quote Section */}
       <section id="stories" className="py-8 md:py-12 px-[5%] bg-white">
-        <div className="max-w-2xl mx-auto">
+        <div className="max-w-xl mx-auto">
           <div className="bg-[var(--navy-deep)] rounded-[32px] p-8 md:p-10 text-white relative overflow-hidden text-center">
             <div className="absolute top-0 right-0 p-8 text-[var(--sky-soft)] text-xl font-serif italic font-light opacity-5 leading-none select-none">HEALORA</div>
             
