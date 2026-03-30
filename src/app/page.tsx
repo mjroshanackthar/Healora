@@ -442,23 +442,21 @@ export default function HealoraPage() {
         </div>
       </section>
 
-      {/* Stories / Stats */}
-      <section id="stories" className="py-24 px-[5%] bg-white">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12 bg-[var(--navy-deep)] rounded-[40px] p-10 md:p-12 lg:p-20 text-white relative overflow-hidden">
-            <div className="absolute top-0 right-0 p-8 text-[var(--sky-soft)] text-xl font-serif italic font-light opacity-10 leading-none select-none">HEALORA</div>
-
-            {[
-              { text: "Healing with Compassion" },
-              { text: "Empowering Inner Strength" },
-              { text: "Mindset Transformation" },
-              { text: "Guided Growth Journey" }
-            ].map((item) => (
-              <div key={item.text} className="text-center group">
-                <div className="text-2xl md:text-4xl mb-3 md:mb-6 group-hover:scale-110 transition-transform duration-500">{item.icon}</div>
-                <div className="text-sm md:text-lg font-serif text-white leading-snug tracking-wide max-w-[150px] md:max-w-[200px] mx-auto italic font-light opacity-90">{item.text}</div>
+      {/* Stories / Quote Section */}
+      <section id="stories" className="py-12 md:py-16 px-[5%] bg-white">
+        <div className="max-w-3xl mx-auto">
+          <div className="bg-[var(--navy-deep)] rounded-[32px] p-10 md:p-12 text-white relative overflow-hidden text-center">
+            <div className="absolute top-0 right-0 p-8 text-[var(--sky-soft)] text-xl font-serif italic font-light opacity-5 leading-none select-none">HEALORA</div>
+            
+            <blockquote className="relative z-10">
+              <div className="flex justify-center mb-10 translate-y-2">
+                <Sparkles className="w-8 h-8 text-[var(--sky-soft)] animate-pulse opacity-40" />
               </div>
-            ))}
+              <p className="text-2xl md:text-3xl lg:text-4xl font-serif italic font-light leading-snug tracking-tight">
+                "Healing is not about being fixed — <br className="hidden md:block" />
+                it's about <span className="text-[var(--sky-soft)] underline decoration-[var(--sky-soft)]/20 underline-offset-8">becoming whole.</span>"
+              </p>
+            </blockquote>
           </div>
         </div>
       </section>
