@@ -327,6 +327,7 @@ export default function HealoraPage() {
       </section>
 
       {/* About Section */}
+      {/* About Section */}
       <section id="about" className="py-24 px-[5%] bg-white relative overflow-hidden">
         <div className="about-blob absolute -right-20 -top-20 w-[500px] h-[500px] opacity-10" />
 
@@ -335,7 +336,7 @@ export default function HealoraPage() {
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="relative flex justify-center"
+            className="relative flex justify-center items-center"
           >
             <div className="relative z-10 w-full max-w-[400px] aspect-square rounded-full overflow-hidden border-4 border-white shadow-2xl">
               <Image
@@ -346,6 +347,7 @@ export default function HealoraPage() {
                 className="object-cover"
               />
             </div>
+
             {/* Decorative Rings */}
             {[0, 1, 2].map((i) => (
               <div
@@ -388,6 +390,8 @@ export default function HealoraPage() {
           </motion.div>
         </div>
       </section>
+
+
 
       {/* Services Section */}
       <section id="services" className="py-24 px-[5%] bg-[var(--watercolor-bg)]">
