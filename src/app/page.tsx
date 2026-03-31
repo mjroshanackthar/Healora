@@ -449,16 +449,16 @@ export default function HealoraPage() {
       </section>
 
       {/* Philosophy Quote Section */}
-      <section className="py-12 md:py-20 px-[5%] bg-white pb-24">
+      <section className="py-8 md:py-12 px-[5%] bg-white pb-16">
         <div className="max-w-4xl mx-auto">
-          <div className="bg-[var(--navy-deep)] rounded-[40px] p-12 md:p-16 text-white relative overflow-hidden text-center shadow-xl">
-            <div className="absolute top-0 right-0 p-8 text-[var(--sky-soft)] text-xl font-serif italic font-light opacity-5 leading-none select-none">HEALORA</div>
+          <div className="bg-[var(--navy-deep)] rounded-[40px] p-8 md:p-10 text-white relative overflow-hidden text-center shadow-xl">
+            <div className="absolute top-0 right-0 p-6 text-[var(--sky-soft)] text-xl font-serif italic font-light opacity-5 leading-none select-none">HEALORA</div>
             
             <blockquote className="relative z-10 max-w-3xl mx-auto">
-              <div className="flex justify-center mb-8">
-                <Sparkles className="w-10 h-10 text-[var(--sky-soft)] animate-pulse opacity-40" />
+              <div className="flex justify-center mb-4">
+                <Sparkles className="w-8 h-8 text-[var(--sky-soft)] animate-pulse opacity-40" />
               </div>
-              <p className="text-3xl md:text-4xl lg:text-5xl font-serif italic font-light leading-snug tracking-tight mb-8">
+              <p className="text-3xl md:text-4xl lg:text-5xl font-serif italic font-light leading-snug tracking-tight">
                 "Healing is not about being fixed — <br className="hidden md:block" />
                 it's about <span className="text-[var(--sky-soft)] underline decoration-[var(--sky-soft)]/20 underline-offset-8">becoming whole.</span>"
               </p>
