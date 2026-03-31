@@ -48,29 +48,34 @@ export default function HealoraPage() {
     window.addEventListener('scroll', handleScroll);
 
     // Active Section Observer
-    const sections = ['hero', 'about', 'services', 'stories', 'faq', 'contact'];
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActiveSection(entry.target.id);
-          }
-        });
-      },
-      { threshold: 0.2, rootMargin: "-10% 0px -70% 0px" }
-    );
+    const sections = ['hero', 'about', 'services', 'faq', 'contact'];
+    
+    // Using a scroll listener for more robust active section tracking instead of IntersectionObserver
+    // as very tall sections can fail with threshold-based observers.
+    const handleScrollTracking = () => {
+      const scrollPosition = window.scrollY + 150; // Offset for fixed header
+      
+      let current = '';
+      for (let i = sections.length - 1; i >= 0; i--) {
+        const el = document.getElementById(sections[i]);
+        if (el && el.offsetTop <= scrollPosition) {
+          current = sections[i];
+          break;
+        }
+      }
+      
+      if (current && current !== activeSection) {
+        setActiveSection(current);
+      }
+    };
 
-    sections.forEach((id) => {
-      const el = document.getElementById(id);
-      if (el) observer.observe(el);
-    });
+    window.addEventListener('scroll', handleScrollTracking);
+    // Call once to set initial state
+    handleScrollTracking();
 
     return () => {
       window.removeEventListener('scroll', handleScroll);
-      sections.forEach((id) => {
-        const el = document.getElementById(id);
-        if (el) observer.unobserve(el);
-      });
+      window.removeEventListener('scroll', handleScrollTracking);
     };
   }, []);
 
@@ -108,22 +113,18 @@ export default function HealoraPage() {
     }
   };
 
-  const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
-    e.preventDefault();
-    const el = document.getElementById(id);
-    if (el) {
-      const offset = 100;
-      const bodyRect = document.body.getBoundingClientRect().top;
-      const elementRect = el.getBoundingClientRect().top;
-      const elementPosition = elementRect - bodyRect;
-      const offsetPosition = elementPosition - offset;
-
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: 'smooth'
-      });
-      setIsMobileMenuOpen(false);
-    }
+  const scrollToSection = (id: string) => {
+    console.log('scrollToSection called with:', id);
+    setIsMobileMenuOpen(false);
+    setTimeout(() => {
+      const el = document.getElementById(id);
+      console.log('element found:', el, 'offsetTop:', el?.offsetTop);
+      if (el) {
+        const top = el.getBoundingClientRect().top + window.scrollY - 80;
+        console.log('scrolling to:', top);
+        window.scrollTo({ top, behavior: 'smooth' });
+      }
+    }, 50);
   };
 
   const services = [
@@ -192,7 +193,7 @@ export default function HealoraPage() {
     <div className="relative min-h-screen">
       {/* Progress Bar */}
       <motion.div
-        className="fixed top-0 left-0 right-0 h-1 bg-[var(--steel-blue)] origin-left z-[1001]"
+        className="fixed top-0 left-0 right-0 h-1 bg-[var(--steel-blue)] origin-left z-[1001] pointer-events-none"
         style={{ scaleX }}
       />
 
@@ -202,35 +203,36 @@ export default function HealoraPage() {
           }`}
       >
         <div className="flex items-center justify-between max-w-7xl mx-auto">
-          <a href="#" className="flex items-center gap-2 text-[var(--navy-deep)] font-serif text-2xl tracking-tight">
+          <button 
+            onClick={() => scrollToSection('hero')}
+            className="flex items-center gap-2 text-[var(--navy-deep)] font-serif text-2xl tracking-tight z-10 bg-transparent border-none cursor-pointer"
+          >
             <Leaf className="w-6 h-6 text-[var(--steel-blue)]" />
             <span className="font-light tracking-widest text-xl">HEALORA</span>
-          </a>
+          </button>
 
           <ul className="hidden md:flex items-center gap-10">
-            {['About', 'Services', 'Stories', 'FAQ'].map((item) => (
+            {['About', 'Services', 'FAQ'].map((item) => (
               <li key={item}>
-                <a
-                  href={`#${item.toLowerCase()}`}
-                  onClick={(e) => scrollToSection(e, item.toLowerCase())}
-                  className={`text-xs font-semibold tracking-widest uppercase transition-all duration-300 relative group py-1 ${activeSection === item.toLowerCase() ? 'text-[var(--steel-blue)]' : 'text-[var(--navy-primary)] hover:text-[var(--steel-blue)]'
+                <button
+                  onClick={() => scrollToSection(item.toLowerCase())}
+                  className={`text-xs font-semibold tracking-widest uppercase transition-all duration-300 relative group py-1 bg-transparent border-none cursor-pointer ${activeSection === item.toLowerCase() ? 'text-[var(--steel-blue)]' : 'text-[var(--navy-primary)] hover:text-[var(--steel-blue)]'
                     }`}
                 >
                   {item}
                   <span className={`absolute bottom-0 left-0 h-[1.5px] bg-[var(--steel-blue)] transition-all duration-300 ${activeSection === item.toLowerCase() ? 'w-full' : 'w-0 group-hover:w-full'
                     }`} />
-                </a>
+                </button>
               </li>
             ))}
             <li>
-              <a
-                href="#contact"
-                onClick={(e) => scrollToSection(e, 'contact')}
-                className={`px-6 py-2 rounded-full text-[0.7rem] font-bold tracking-[0.2em] uppercase transition-all duration-300 border ${activeSection === 'contact' ? 'bg-[var(--steel-blue)] border-[var(--steel-blue)] text-white' : 'bg-[var(--navy-primary)] border-[var(--navy-primary)] text-white hover:bg-[var(--steel-blue)] hover:border-[var(--steel-blue)]'
+              <button
+                onClick={() => scrollToSection('contact')}
+                className={`px-6 py-2 rounded-full text-[0.7rem] font-bold tracking-[0.2em] uppercase transition-all duration-300 border cursor-pointer ${activeSection === 'contact' ? 'bg-[var(--steel-blue)] border-[var(--steel-blue)] text-white' : 'bg-[var(--navy-primary)] border-[var(--navy-primary)] text-white hover:bg-[var(--steel-blue)] hover:border-[var(--steel-blue)]'
                   }`}
               >
                 Connect
-              </a>
+              </button>
             </li>
           </ul>
 
@@ -252,25 +254,23 @@ export default function HealoraPage() {
               className="md:hidden overflow-hidden bg-white/95 backdrop-blur-md"
             >
               <div className="flex flex-col gap-6 py-10 px-4 border-t border-[var(--steel-blue)]/10">
-                {['About', 'Services', 'Stories', 'FAQ'].map((item) => (
-                  <a
+                {['About', 'Services', 'FAQ'].map((item) => (
+                  <button
                     key={item}
-                    href={`#${item.toLowerCase()}`}
-                    onClick={(e) => scrollToSection(e, item.toLowerCase())}
-                    className={`text-lg font-serif transition-colors ${activeSection === item.toLowerCase() ? 'text-[var(--steel-blue)]' : 'text-[var(--navy-deep)] hover:text-[var(--steel-blue)]'
+                    onClick={() => scrollToSection(item.toLowerCase())}
+                    className={`text-lg font-serif transition-colors bg-transparent border-none cursor-pointer text-left ${activeSection === item.toLowerCase() ? 'text-[var(--steel-blue)]' : 'text-[var(--navy-deep)] hover:text-[var(--steel-blue)]'
                       }`}
                   >
                     {item}
-                  </a>
+                  </button>
                 ))}
-                <a
-                  href="#contact"
-                  onClick={(e) => scrollToSection(e, 'contact')}
-                  className={`px-8 py-4 rounded-xl text-center text-[0.7rem] font-bold tracking-[0.2em] uppercase transition-all duration-300 ${activeSection === 'contact' ? 'bg-[var(--steel-blue)] text-white' : 'bg-[var(--navy-primary)] text-white'
+                <button
+                  onClick={() => scrollToSection('contact')}
+                  className={`px-8 py-4 rounded-xl text-center text-[0.7rem] font-bold tracking-[0.2em] uppercase transition-all duration-300 border-none cursor-pointer ${activeSection === 'contact' ? 'bg-[var(--steel-blue)] text-white' : 'bg-[var(--navy-primary)] text-white'
                     }`}
                 >
                   Connect
-                </a>
+                </button>
               </div>
             </motion.div>
           )}
@@ -328,7 +328,8 @@ export default function HealoraPage() {
 
       {/* About Section */}
       {/* About Section */}
-      <section id="about" className="py-24 px-[5%] bg-white relative overflow-hidden">
+      {/* About Section */}
+      <section id="about" className="py-24 px-[5%] bg-white relative overflow-hidden scroll-mt-20">
         <div className="about-blob absolute -right-20 -top-20 w-[500px] h-[500px] opacity-10" />
 
         <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-16 items-center">
@@ -394,7 +395,7 @@ export default function HealoraPage() {
 
 
       {/* Services Section */}
-      <section id="services" className="py-24 px-[5%] bg-[var(--watercolor-bg)]">
+      <section id="services" className="py-24 px-[5%] bg-[var(--watercolor-bg)] scroll-mt-20">
         <div className="text-center max-w-3xl mx-auto mb-16">
           <div className="section-label justify-center">Services</div>
           <h2 className="text-4xl lg:text-5xl font-serif text-[var(--navy-deep)] mb-6 leading-tight">
@@ -447,17 +448,17 @@ export default function HealoraPage() {
         </div>
       </section>
 
-      {/* Stories / Quote Section */}
-      <section id="stories" className="py-8 md:py-12 px-[5%] bg-white">
-        <div className="max-w-xl mx-auto">
-          <div className="bg-[var(--navy-deep)] rounded-[32px] p-8 md:p-10 text-white relative overflow-hidden text-center">
+      {/* Philosophy Quote Section */}
+      <section className="py-12 md:py-20 px-[5%] bg-white pb-24">
+        <div className="max-w-4xl mx-auto">
+          <div className="bg-[var(--navy-deep)] rounded-[40px] p-12 md:p-16 text-white relative overflow-hidden text-center shadow-xl">
             <div className="absolute top-0 right-0 p-8 text-[var(--sky-soft)] text-xl font-serif italic font-light opacity-5 leading-none select-none">HEALORA</div>
             
-            <blockquote className="relative z-10">
-              <div className="flex justify-center mb-10 translate-y-2">
-                <Sparkles className="w-8 h-8 text-[var(--sky-soft)] animate-pulse opacity-40" />
+            <blockquote className="relative z-10 max-w-3xl mx-auto">
+              <div className="flex justify-center mb-8">
+                <Sparkles className="w-10 h-10 text-[var(--sky-soft)] animate-pulse opacity-40" />
               </div>
-              <p className="text-2xl md:text-3xl lg:text-4xl font-serif italic font-light leading-snug tracking-tight">
+              <p className="text-3xl md:text-4xl lg:text-5xl font-serif italic font-light leading-snug tracking-tight mb-8">
                 "Healing is not about being fixed — <br className="hidden md:block" />
                 it's about <span className="text-[var(--sky-soft)] underline decoration-[var(--sky-soft)]/20 underline-offset-8">becoming whole.</span>"
               </p>
@@ -467,7 +468,7 @@ export default function HealoraPage() {
       </section>
 
       {/* FAQ Section */}
-      <section id="faq" className="py-24 px-[5%] bg-white relative overflow-hidden">
+      <section id="faq" className="py-24 px-[5%] bg-white relative overflow-hidden scroll-mt-20">
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-16">
             <div className="section-label justify-center">Inquiry</div>
@@ -480,19 +481,35 @@ export default function HealoraPage() {
             {[
               {
                 q: "What is Emotional Resilience Coaching?",
-                a: "It's a process of building your internal strength to handle life's challenges without feeling overwhelmed. We focus on tools that help you bounce back faster and stay grounded."
+                a: "It's a specialized process of building your internal strength to navigate life's challenges without feeling depleted. We focus on practical mindset tools that help you bounce back faster from stress, setbacks, and emotional fatigue."
               },
               {
-                q: "How many sessions do I need?",
-                a: "Healing is a journey, not a sprint. While every soul's path is unique, most clients start feeling a profound shift within 4 to 6 sessions."
+                q: "How is this different from traditional therapy?",
+                a: "While therapy often explores your past to understand 'why,' coaching is action-oriented and forward-focused. We look at where you are 'now' and where you want to be 'next,' providing the specific mental and emotional tools to bridge that gap."
               },
               {
-                q: "Is this the same as traditional therapy?",
-                a: "While both are valuable, coaching focuses on your 'now' and your 'next.' We look at where you are today and build the mindset and tools to get you where you want to be."
+                q: "How many sessions do I typically need?",
+                a: "Transformation is a process. While some find clarity in 1-2 sessions, most deep mindset shifts happen over 4 to 8 sessions. Our Mindset Reset program is specifically designed as a 4-week intensive for optimal results."
               },
               {
-                q: "Can I reach out between sessions?",
-                a: "Absolutely. I provide WhatsApp support to all my regular clients to ensure you feel supported even when the session ends."
+                q: "What happens in a Discovery Call?",
+                a: "It's a complimentary 15-minute heart-to-heart where we discuss your current challenges and goals. It helps us see if we are a good energetic match and which coaching path would best serve your journey."
+              },
+              {
+                q: "Can I join your sessions from anywhere?",
+                a: "Yes! All sessions are conducted virtually (via Zoom or Google Meet), allowing you to begin your healing journey from the comfort and privacy of your own safe space, regardless of where you are in the world."
+              },
+              {
+                q: "Is my privacy and confidentiality guaranteed?",
+                a: "Absolutely. Creating a safe, sacred space is the foundation of Healora. Everything shared within our sessions—and even the fact that you are in coaching—is kept strictly confidential."
+              },
+              {
+                q: "What if I am not a parent or a student?",
+                a: "Coaching is for everyone! While I have specialized workshops, my 1:1 sessions and Mindset Reset program are tailored for anyone ready to do the inner work, regardless of life stage or profession."
+              },
+              {
+                q: "How can I book my first session?",
+                a: "The best way is to start with a complimentary Discovery Call. You can use the 'Connect' button or reach out directly on WhatsApp to coordinate a time that works for you."
               }
             ].map((faq, i) => (
               <div
@@ -530,7 +547,7 @@ export default function HealoraPage() {
         </div>
       </section>
 
-      <section id="contact" className="py-24 px-[5%] bg-[var(--mist-white)] relative">
+      <section id="contact" className="py-24 px-[5%] bg-[var(--mist-white)] relative scroll-mt-20">
         <div className="max-w-6xl mx-auto grid lg:grid-cols-2 gap-20">
           <div>
             <div className="section-label">GET IN TOUCH</div>
@@ -643,7 +660,7 @@ export default function HealoraPage() {
           <div>
             <h4 className="text-white text-[0.65rem] font-bold tracking-[0.2em] uppercase mb-8">Navigate</h4>
             <ul className="space-y-4 text-xs tracking-widest uppercase">
-              {['About', 'Services', 'Stories', 'FAQ'].map(item => (
+              {['About', 'Services', 'FAQ'].map(item => (
                 <li key={item}><a href={`#${item.toLowerCase()}`} className="hover:text-white transition-colors">{item}</a></li>
               ))}
             </ul>
