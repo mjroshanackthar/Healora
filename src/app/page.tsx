@@ -48,7 +48,7 @@ export default function HealoraPage() {
     window.addEventListener('scroll', handleScroll);
 
     // Active Section Observer
-    const sections = ['hero', 'about', 'services', 'faq', 'contact'];
+    const sections = ['hero', 'about', 'awards', 'services', 'faq', 'contact'];
     
     // Using a scroll listener for more robust active section tracking instead of IntersectionObserver
     // as very tall sections can fail with threshold-based observers.
@@ -212,7 +212,7 @@ export default function HealoraPage() {
           </button>
 
           <ul className="hidden md:flex items-center gap-10">
-            {['About', 'Services', 'FAQ'].map((item) => (
+            {['About', 'Awards', 'Services', 'FAQ'].map((item) => (
               <li key={item}>
                 <button
                   onClick={() => scrollToSection(item.toLowerCase())}
@@ -254,7 +254,7 @@ export default function HealoraPage() {
               className="md:hidden overflow-hidden bg-white/95 backdrop-blur-md"
             >
               <div className="flex flex-col gap-6 py-10 px-4 border-t border-[var(--steel-blue)]/10">
-                {['About', 'Services', 'FAQ'].map((item) => (
+                {['About', 'Awards', 'Services', 'FAQ'].map((item) => (
                   <button
                     key={item}
                     onClick={() => scrollToSection(item.toLowerCase())}
@@ -392,7 +392,129 @@ export default function HealoraPage() {
         </div>
       </section>
 
+      {/* Awards & World Record Section */}
+      <section id="awards" className="py-24 px-[5%] bg-gradient-to-b from-white via-[var(--watercolor-bg)]/30 to-white relative overflow-hidden scroll-mt-20 border-t border-b border-[var(--steel-blue)]/5">
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute top-[20%] left-[-10%] w-[300px] h-[300px] bg-[var(--watercolor-bg)] opacity-40 blur-[80px] rounded-full" />
+          <div className="absolute bottom-[20%] right-[-10%] w-[300px] h-[300px] bg-[var(--sky-soft)] opacity-[0.08] blur-[80px] rounded-full" />
+        </div>
 
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center max-w-3xl mx-auto mb-16">
+            <div className="section-label justify-center">WORLD RECORD HOLDER</div>
+            <h2 className="text-4xl lg:text-5xl font-serif text-[var(--navy-deep)] mb-6 leading-tight">
+              A Historic Milestone in <em className="italic text-[var(--steel-blue)] font-light">Creativity & Teamwork</em>
+            </h2>
+            <p className="text-[var(--navy-primary)] opacity-80 font-light max-w-2xl mx-auto">
+              Sharmila G A has successfully participated and achieved a new world record in the Virtue Book of World Records, demonstrating the power of artistic expression and collaborative mindset.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {/* Card 1: Sharmila holding certificate */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="glass-card bg-white/70 hover:bg-white transition-all duration-500 rounded-[24px] overflow-hidden shadow-lg hover:shadow-2xl border border-[var(--steel-blue)]/10 hover:border-[var(--steel-blue)]/30 flex flex-col group"
+            >
+              <div className="relative aspect-[4/5] w-full overflow-hidden">
+                <Image
+                  src={`${BASE_PATH}/world_record_holding.jpg`}
+                  alt="Sharmila G A holding World Record Certificate and Medal"
+                  fill
+                  sizes="(max-width: 768px) 100vw, 33vw"
+                  className="object-cover transition-transform duration-700 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[var(--navy-deep)]/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              </div>
+              <div className="p-6 flex-grow flex flex-col justify-between">
+                <div>
+                  <h3 className="text-xl font-serif text-[var(--navy-deep)] mb-3 group-hover:text-[var(--steel-blue)] transition-colors">
+                    World Record Holder
+                  </h3>
+                  <p className="text-sm text-[var(--navy-primary)] font-light leading-relaxed">
+                    Sharmila G A proudly presenting the Virtue Book of World Records certificate and gold medal at the historic event.
+                  </p>
+                </div>
+                <div className="mt-4 pt-4 border-t border-[var(--steel-blue)]/5 flex items-center gap-2 text-xs font-semibold text-[var(--steel-blue)] uppercase tracking-wider">
+                  <Sparkles className="w-4 h-4 text-[var(--steel-blue)] animate-pulse" />
+                  <span>Imagination Into Reality</span>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Card 2: Certificate Close-up */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="glass-card bg-white/70 hover:bg-white transition-all duration-500 rounded-[24px] overflow-hidden shadow-lg hover:shadow-2xl border border-[var(--steel-blue)]/10 hover:border-[var(--steel-blue)]/30 flex flex-col group"
+            >
+              <div className="relative aspect-[4/5] w-full overflow-hidden">
+                <Image
+                  src={`${BASE_PATH}/world_record_certificate.jpg`}
+                  alt="Virtue Book of World Records Official Certificate"
+                  fill
+                  sizes="(max-width: 768px) 100vw, 33vw"
+                  className="object-cover transition-transform duration-700 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[var(--navy-deep)]/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              </div>
+              <div className="p-6 flex-grow flex flex-col justify-between">
+                <div>
+                  <h3 className="text-xl font-serif text-[var(--navy-deep)] mb-3 group-hover:text-[var(--steel-blue)] transition-colors">
+                    Official Certificate
+                  </h3>
+                  <p className="text-sm text-[var(--navy-primary)] font-light leading-relaxed">
+                    Achieved a new world record for the <strong>"Largest Coffee Painting Puzzle Picture"</strong> (100 sq. ft. logo painting) with 100 Tamil Life Coaches on June 7, 2026, in Puducherry, India.
+                  </p>
+                </div>
+                <div className="mt-4 pt-4 border-t border-[var(--steel-blue)]/5 flex items-center gap-2 text-xs font-semibold text-[var(--steel-blue)] uppercase tracking-wider">
+                  <Sparkles className="w-4 h-4 text-[var(--steel-blue)] animate-pulse" />
+                  <span>Largest Coffee Painting</span>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Card 3: Medal Close-up */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              className="glass-card bg-white/70 hover:bg-white transition-all duration-500 rounded-[24px] overflow-hidden shadow-lg hover:shadow-2xl border border-[var(--steel-blue)]/10 hover:border-[var(--steel-blue)]/30 flex flex-col group"
+            >
+              <div className="relative aspect-[4/5] w-full overflow-hidden">
+                <Image
+                  src={`${BASE_PATH}/world_record_medal.jpg`}
+                  alt="Virtue Book of World Records Gold Medal"
+                  fill
+                  sizes="(max-width: 768px) 100vw, 33vw"
+                  className="object-cover transition-transform duration-700 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[var(--navy-deep)]/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              </div>
+              <div className="p-6 flex-grow flex flex-col justify-between">
+                <div>
+                  <h3 className="text-xl font-serif text-[var(--navy-deep)] mb-3 group-hover:text-[var(--steel-blue)] transition-colors">
+                    Gold Medal of Honor
+                  </h3>
+                  <p className="text-sm text-[var(--navy-primary)] font-light leading-relaxed">
+                    A beautiful token symbolizing collaborative focus, creativity, and the power of starting with a vision and bringing it into reality.
+                  </p>
+                </div>
+                <div className="mt-4 pt-4 border-t border-[var(--steel-blue)]/5 flex items-center gap-2 text-xs font-semibold text-[var(--steel-blue)] uppercase tracking-wider">
+                  <Sparkles className="w-4 h-4 text-[var(--steel-blue)] animate-pulse" />
+                  <span>Collaborative Excellence</span>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
 
       {/* Services Section */}
       <section id="services" className="py-24 px-[5%] bg-[var(--watercolor-bg)] scroll-mt-20">
@@ -660,7 +782,7 @@ export default function HealoraPage() {
           <div>
             <h4 className="text-white text-[0.65rem] font-bold tracking-[0.2em] uppercase mb-8">Navigate</h4>
             <ul className="space-y-4 text-xs tracking-widest uppercase">
-              {['About', 'Services', 'FAQ'].map(item => (
+              {['About', 'Awards', 'Services', 'FAQ'].map(item => (
                 <li key={item}><a href={`#${item.toLowerCase()}`} className="hover:text-white transition-colors">{item}</a></li>
               ))}
             </ul>
