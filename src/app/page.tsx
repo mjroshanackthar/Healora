@@ -421,7 +421,7 @@ export default function HealoraPage() {
             >
               <div className="relative aspect-[4/5] w-full overflow-hidden">
                 <Image
-                  src={`${BASE_PATH}/world_record_holding.jpg?v=2`}
+                  src={`${BASE_PATH}/world_record_holding_v2.jpg`}
                   alt="Sharmila G A holding World Record Certificate and Medal"
                   fill
                   sizes="(max-width: 768px) 100vw, 33vw"
@@ -455,7 +455,7 @@ export default function HealoraPage() {
             >
               <div className="relative aspect-[4/5] w-full overflow-hidden">
                 <Image
-                  src={`${BASE_PATH}/world_record_certificate.jpg?v=2`}
+                  src={`${BASE_PATH}/world_record_certificate_v2.jpg`}
                   alt="Virtue Book of World Records Official Certificate"
                   fill
                   sizes="(max-width: 768px) 100vw, 33vw"
